@@ -1,0 +1,7 @@
+import "./js/details"
+import './js/footer';
+import './js/header';
+import './js/hero';
+import './js/menu';
+import './js/random';
+import './js/search';
