@@ -5,3 +5,5 @@ import './js/hero';
 import './js/menu';
 import './js/random';
 import './js/search';
+import './js/notfound';
+import './js/fav';
