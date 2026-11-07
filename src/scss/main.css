@@ -1,0 +1,241 @@
+.container {
+  max-width: 1326px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media screen and (min-width: 390px) {
+  .container {
+    width: 390px;
+    padding: 0 10px;
+  }
+}
+@media screen and (min-width: 1326px) {
+  .container {
+    width: 1326px;
+    padding: 0 15px;
+  }
+}
+
+ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+button {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+address {
+  font-style: normal;
+}
+
+input,
+textarea {
+  display: block;
+  border: none;
+}
+
+input,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hero {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.hero__title {
+  color: black;
+  font-size: 50px;
+}
+.hero__subtitle {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.search {
+  padding: 40px 0;
+}
+.search__box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 0px 24px rgba(160, 174, 192, 0.348);
+}
+.search__input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 99px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+.search__input-wrapper:focus-within {
+  border-color: #cbd5e1;
+}
+.search__input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  color: #333d4d;
+  padding-left: 25px;
+}
+.search__input::-moz-placeholder {
+  color: #718096;
+}
+.search__input::placeholder {
+  color: #718096;
+}
+.search__dropdown {
+  position: relative;
+  display: inline-block;
+}
+.search__dropdown::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' fill='none' viewBox='0 0 10 6'%3E%3Cpath stroke='%23333d4d' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+.search__select {
+  height: 48px;
+  min-width: 180px;
+  padding: 0 44px 0 20px;
+  font-size: 15px;
+  color: #333d4d;
+  border: 1px solid #e2e8f0;
+  border-radius: 99px;
+  background-color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.2s ease;
+}
+.search__select:hover {
+  border-color: #cbd5e1;
+}
+.search__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2b6cb0;
+  background-color: #ebf5ff;
+  border: 1px solid #c2e0ff;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.search__btn:hover {
+  background-color: #78b5ff;
+  color: #fdfeff;
+  border: 1px solid #4693e6;
+}
+.search__btn:hover .search__icon--btn {
+  stroke: #fdfeff !important;
+  fill: none !important;
+}
+.search_text {
+  flex-basis: 100%;
+  margin: 16px 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333d4d;
+}
+.search_text::first-letter {
+  text-transform: uppercase;
+}
+.search__list {
+  flex-basis: 100%;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.search__icon {
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  display: block;
+}
+.search__icon use {
+  width: 100%;
+  height: 100%;
+}
+.search__icon--loupe {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  fill: #718096 !important;
+  stroke: #718096 !important;
+}
+.search__icon--arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  stroke: #333d4d !important;
+  fill: none !important;
+}
+.search__icon--btn {
+  stroke: #2b6cb0 !important;
+  fill: none !important;
+}/*# sourceMappingURL=main.css.map */

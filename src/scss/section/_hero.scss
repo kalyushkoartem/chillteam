@@ -1,0 +1,14 @@
+.hero{
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &__title{
+        color: black;
+        font-size: 50px;
+    }
+
+    &__subtitle{
+        margin-top: 20px;
+        font-size: 20px;
+    }
+}
