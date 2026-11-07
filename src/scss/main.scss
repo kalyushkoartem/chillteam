@@ -1,10 +1,11 @@
 @use "./base/countainer";
 @use "./base/reset";
 @use "./base/var";
-@use "./section/footer";
 @use "./section/header";
 @use "./section/hero";
-@use "./section/menu";
-@use "./section/random";
-@use "./section/details";
 @use "./section/search";
+@use "./section/details";
+@use "./section/notfound.scss";
+@use "./section/footer";
+@use "./section/menu";
+@use "./section/fav";
