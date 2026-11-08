@@ -1,7 +1,7 @@
 @use '../base/var' as *;
 
 .search {
-  padding: 40px 0; 
+  padding: 40px 0;
 
   &__box {
     display: flex;
@@ -11,44 +11,45 @@
     background-color: $color-bg-white;
     padding: 24px;
     border-radius: 24px;
-    box-shadow: 0 0px 24px rgba(160, 174, 192, 0.348); 
+    box-shadow: 0 0px 24px rgba(160, 174, 192, 0.348);
   }
 
   // 🔍 Інпут пошуку
-&__input-wrapper {
+  &__input-wrapper {
     position: relative;
     flex: 1;
-  display: flex;       // Робимо флекс-контейнером
-  align-items: center; // Центруємо іконку та інпут по вертикалі
-  width: 100%; 
-  height: 48px;
-  padding: 0 16px;     // Однаковий внутрішній відступ зліва та справа
-  
-  border: 1px solid $color-border;
-  border-radius: 99px; 
-  background-color: $color-bg-white;
-  transition: border-color 0.2s ease;
+    display: flex; // Робимо флекс-контейнером
+    align-items: center; // Центруємо іконку та інпут по вертикалі
+    width: 100%;
+    height: 48px;
+    padding: 0 16px; // Однаковий внутрішній відступ зліва та справа
 
-  &:focus-within {     // Рамка буде змінюватися при фокусі на інпуті всередині
-    border-color: $color-border-hover;
+    border: 1px solid $color-border;
+    border-radius: 99px;
+    background-color: $color-bg-white;
+    transition: border-color 0.2s ease;
+
+    &:focus-within {
+      // Рамка буде змінюватися при фокусі на інпуті всередині
+      border-color: $color-border-hover;
+    }
   }
-}
 
-&__input {
-  width: 100%;         // Інпут займає все вільне місце всередині обгортки
-  height: 100%;        // Розтягується на всю висоту (48px)
-  border: none;        // Прибираємо власну рамку інпута
-  outline: none;       // Прибираємо контур при фокусі
-  background: transparent; // Робимо фон прозорим
-  
-  font-size: 15px;
-  color: $color-text-main;
-  padding-left: 25px;  // Невеликий відступ від іконки (якщо вона стоїть перед інпутом)
+  &__input {
+    width: 100%; // Інпут займає все вільне місце всередині обгортки
+    height: 100%; // Розтягується на всю висоту (48px)
+    border: none; // Прибираємо власну рамку інпута
+    outline: none; // Прибираємо контур при фокусі
+    background: transparent; // Робимо фон прозорим
 
-  &::placeholder {
-    color: $color-text-muted;
+    font-size: 15px;
+    color: $color-text-main;
+    padding-left: 25px; // Невеликий відступ від іконки (якщо вона стоїть перед інпутом)
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
   }
-}
 
   // 🔽 Обгортка для кастомної стрілочки селекту
   &__dropdown {
@@ -56,7 +57,7 @@
     display: inline-block;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       right: 20px;
       top: 50%;
@@ -93,12 +94,12 @@
 
   // 🎲 Кнопка "Випадковий покемон"
   &__btn {
-  display: inline-flex; // Вмикаємо флекс для елементів усередині кнопки
-  align-items: center;  // Центруємо іконку та текст по вертикалі
-  justify-content: center; // Центруємо весь вміст усередині кнопки
-  gap: 8px; 
+    display: inline-flex; // Вмикаємо флекс для елементів усередині кнопки
+    align-items: center; // Центруємо іконку та текст по вертикалі
+    justify-content: center; // Центруємо весь вміст усередині кнопки
+    gap: 8px;
     height: 48px;
-    padding: 0 24px ;
+    padding: 0 24px;
     font-size: 15px;
     font-weight: 500;
     color: $color-btn-text;
@@ -113,21 +114,21 @@
       color: $color-btntext-hover;
       border: 1px solid $color-btnborder-hover;
 
-    .search__icon--btn {
-      stroke: $color-btntext-hover !important;
-      fill: none !important; // залишаємо прозорою всередині, якщо вона контурна
-    }
+      .search__icon--btn {
+        stroke: $color-btntext-hover !important;
+        fill: none !important; // залишаємо прозорою всередині, якщо вона контурна
+      }
     }
   }
 
   // 📉 Текст "знайдено:" (переноситься на новий рядок завдяки flex-basis)
   &_text {
-    flex-basis: 100%; 
+    flex-basis: 100%;
     margin: 16px 0 0 8px; // невеликий відступ від лівого краю плашки
     font-size: 16px;
     font-weight: 700;
     color: $color-text-main;
-    
+
     // Робимо першу літеру великою через CSS, як на макеті ("Знайдено:")
     &::first-letter {
       text-transform: uppercase;
@@ -140,7 +141,7 @@
     margin-top: 20px;
     padding: 0;
     list-style: none;
-    
+
     // Рекомендую використати Grid для карток, які йдуть нижче
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -165,8 +166,7 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 3;
-      fill: #718096 !important;   
-      stroke: #718096 !important; 
+      stroke: #718096 !important;
     }
 
     // 🔽 Модифікатор стрілочки (для майбутнього селекту)
@@ -177,7 +177,6 @@
       transform: translateY(-50%);
       z-index: 2;
       stroke: #333d4d !important;
-      fill: none !important;
     }
 
     // 🎲 Модифікатор для іконки в кнопці
@@ -185,5 +184,102 @@
       stroke: #2b6cb0 !important;
       fill: none !important;
     }
+  &--fav {
+    width: 22px;
+    height: 22px;
+    display: block;
+
+    fill: rgba(229, 62, 62, 0);
+    stroke: currentColor;
+
+    transition:
+      fill 0.5s ease,
+      stroke 0.5s ease;
+  }
+  }
+  &__item {
+    position: relative;
+    height: 350px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 15px;
+    box-shadow: 0 0px 24px rgba(160, 174, 192, 0.348);
+  }
+
+  &__tag {
+    margin: 0;
+  }
+
+  &__name {
+    text-transform: capitalize;
+  }
+&__fav {
+  color: #718096;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+
+  display: inline-flex;
+  cursor: pointer;
+
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    color: #e53e3e;
+    transform: scale(1.1);
+  }
+
+  &:has(.search__checkbox:checked) {
+    color: #e53e3e;
   }
 }
+
+&__checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+
+  &:focus-visible + .search__icon--fav {
+    outline: 2px solid #2b6cb0;
+    outline-offset: 4px;
+  }
+}
+
+&__checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+}
+
+.search__fav:has(.search__checkbox:checked) .search__icon--fav {
+  fill: rgba(229, 62, 62, 1);
+}
+
+// .svg-test {
+//   margin: 50px;
+
+//   &__icon {
+//     width: 60px;
+//     height: 60px;
+
+//     fill: rgba(229, 62, 62, 0);
+//     stroke: #718096;
+//     stroke-width: 2;
+//     stroke-linecap: round;
+//     stroke-linejoin: round;
+
+//     transition:
+//       fill 0.5s ease,
+//       stroke 0.5s ease,
+//       transform 0.5s ease;
+
+//     &:hover {
+//       fill: #e53e3e;
+//       stroke: #e53e3e;
+//       transform: scale(1.2);
+//     }
+//   }
+// }
