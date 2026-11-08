@@ -1,19 +1,35 @@
 const API_URL = "https://pokeapi.co/api/v2";
 
-
-// Отримання списку покемонів
-export async function getPokemons() {
+export async function getPokemons(perPage = 20, page = 1) {
   try {
-    const response = await fetch(`${API_URL}/pokemon`);
+    const offset = (page - 1) * perPage;
+
+    const response = await fetch(
+      `${API_URL}/pokemon?limit=${perPage}&offset=${offset}`
+    );
 
     if (!response.ok) {
       throw new Error("Помилка отримання покемонів");
     }
 
     const data = await response.json();
-    return data;
+
+    const pokemonArray = await Promise.all(
+      data.results.map(async pokemon => {
+        const response = await fetch(pokemon.url);
+        return await response.json();
+      })
+    );
+
+    return {
+      results: pokemonArray,
+      count: data.count,
+      next: data.next
+    };
+
   } catch (error) {
-    console.error("Сталася помилка при отриманні покемонів:", error);
+    console.error("Помилка отримання покемонів:", error);
+    return null;
   }
 }
 
