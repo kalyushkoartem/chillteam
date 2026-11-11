@@ -1,0 +1,135 @@
+@use "../base/var" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: $color-bg-white;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  width: 100%;
+  height: $header-height;
+  background-color: $color-bg-white;
+  border-bottom: 1px solid $color-border;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.02);
+
+  &__box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: $color-text-main;
+    font-size: 18px;
+    font-weight: 700;
+
+    // Якщо замість порожнього img використовуватимеш SVG або збережеш CSS-покебол
+    img {
+      display: none; // ховаємо порожній img, якщо вставляєш SVG напряму в HTML
+    }
+
+    // Стилізація SVG або іконки покебола
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    height: 100%;
+  }
+
+  &__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 14px;
+    font-weight: 600;
+
+    a,
+    &:not(:has(a)) {
+      text-decoration: none;
+      color: $color-text-main; // За замовчуванням чорні/темні
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        color: $color-btn-text; // При ховері стають синіми
+      }
+    }
+
+    // Лінія підкреслення (анімація для ховеру та активної сторінки)
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: $color-btn-text;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  // Активний елемент (сторінка, на якій ти зараз)
+  &__item.current {
+    a {
+      color: $color-btn-text;
+    }
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &__btn {
+    border: 1px solid $color-btn-border;
+    background-color: $color-btn-bg;
+    color: $color-btn-text;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $color-btn-hover;
+      color: $color-btntext-hover;
+      border-color: $color-btnborder-hover;
+    }
+  }
+}

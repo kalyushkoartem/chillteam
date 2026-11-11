@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-<header class="header">
+    <link rel="stylesheet" href="./scss/section/_fav.scss" />
+  </head>
+  <body>
+    <header class="header">
       <div class="container header__box">
         <a href="./index.html" class="header__logo">
           <img src="" alt="" />
           Pokedex
         </a>
         <ul class="header__list">
-          <li class="header__item">Головна</li>
-          <li class="header__item">Обране</li>
+          <li class="header__item"><a class="header__link" href ="./index.html">Головна</a></li>
+          <li class="header__item current">
+            <a class="header__link" href="./fav.html">Обране</a>
+          </li>
           <li class="header__item">Команда</li>
         </ul>
         <button class="header__btn">тема</button>
@@ -22,8 +25,15 @@
     </header>
 
     <h1 class="fav__title">Моє Обране</h1>
-    <p class="fav_text">Тут зберігаються всі покемони, яких ви додали до улюблених</p>
-<p class="">У вас 7 улюблених покемонів</p>
-<button type="button">Очистити все</button>
-</body>
+
+    <p class="fav_text">
+      Тут зберігаються всі покемони, яких ви додали до улюблених.
+    </p>
+
+    <div class="fav__info">
+      <p class="fav__count">У вас 7 улюблених покемонів</p>
+
+      <button class="fav__btn" type="button">Очистити все</button>
+    </div>
+  </body>
 </html>
