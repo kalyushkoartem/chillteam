@@ -14,7 +14,7 @@
     />
     
     <script type="module" crossorigin src="/chillteam/commonHelpers3.js"></script>
-    <link rel="stylesheet" href="/chillteam/assets/index-264dcc93.css">
+    <link rel="stylesheet" href="/chillteam/assets/index-bbaf988c.css">
   </head>
   <body>
     <!-- Loads the specified .html file -->
@@ -102,54 +102,58 @@
     
     
     <section class="menu">
+     <button class="open-modal">Випадковий покемон</button>
     <div class="container">
-        <div class="menu__modal">
-            <button class="menu__close"></button>
-            <h2>Випадковий покемон</h2>
-            <div class="pokemon">
-                <img class="pokemonimg" src="" alt="">
-                <div class="pokemoninfo">
-                    <p class="">#094</p>
-                    <h1 class="menu__name">Gengar</h1>
-
-                    <span class="menu__typeghost">Ghost</span>
-                    <span class="menu__typepoison">Poison</span>
-
-                    <p class="menu__height">Зріст: 1.5 м</p>
-                    <p class="">Вага: 40.5 кг</p>
-
-                    <h3 class="">Базові характеристики</h3>
-
-                    <p class="stat">
-                        <span>HP</span><span>60</span>
-                        <i style="--value: 40%; --color: #ff784e"></i>
-                    </p>
-                    <p class="stat">
-                        <span>Attack</span><span>65</span>
-                        <i style="--value: 43%; --color: #ff9c42"></i>
-                    </p>
-                    <p class="stat">
-                        <span>Defense</span><span>60</span>
-                        <i style="--value: 40%; --color: #40a8e8"></i>
-                    </p>
-                    <p class="stat">
-                        <span>Sp. Atk</span><span>130</span>
-                        <i style="--value: 87%; --color: #3986ff"></i>
-                    </p>
-                    <p class="stat">
-                        <span>Sp. Def</span><span>75</span>
-                        <i style="--value: 50%; --color: #8561d5"></i>
-                    </p>
-                    <p class="stat">
-                        <span>Speed</span><span>110</span>
-                        <i style="--value: 73%; --color: #8561d5"></i>
-                    </p>
 
 
-                </div>
-            </div>
+  <div class="modal">
+    <div class="modal__content">
+
+      <button class="modal__close">&times;</button>
+
+      <h2>Випадковий покемон</h2>
+
+      <div class="pokemon">
+
+        <div class="pokemon__image">
+          <img class="pokemonimg" src="" alt="Pokemon">
         </div>
+
+        <div class="pokemon__info">
+
+          <p class="pokemon__number">#000</p>
+
+          <h3 class="pokemon__name">Pokemon</h3>
+
+          <div class="pokemon__types"></div>
+
+          <div class="pokemon__details">
+            <div>
+              <p>Зріст</p>
+              <span class="pokemon__height">0 м</span>
+            </div>
+
+            <div>
+              <p>Вага</p>
+              <span class="pokemon__weight">0 кг</span>
+            </div>
+          </div>
+
+          <h4>Базові характеристики</h4>
+
+          <div class="pokemon__stats"></div>
+
+        </div>
+
+      </div>
+
+      <button class="pokemon__random">
+        🎲 Дослідити ще
+      </button>
+
     </div>
+  </div>
+</div>
 </section>
 
     
