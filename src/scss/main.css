@@ -792,6 +792,183 @@ body {
   color: #bb65a3;
 }
 
+.search__tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.search__tag .type-badge,
+.details__filtr .type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.search__tag .type-badge--normal,
+.details__filtr .type-badge--normal {
+  background-color: #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+.search__tag .type-badge--fire,
+.details__filtr .type-badge--fire {
+  background-color: #ffe0dc !important;
+  color: #e85b50 !important;
+}
+
+.search__tag .type-badge--water,
+.details__filtr .type-badge--water {
+  background-color: #dbeafe !important;
+  color: #3478d4 !important;
+}
+
+.search__tag .type-badge--grass,
+.details__filtr .type-badge--grass {
+  background-color: #d9f5df !important;
+  color: #399b57 !important;
+}
+
+.search__tag .type-badge--electric,
+.details__filtr .type-badge--electric {
+  background-color: #fff0bd !important;
+  color: #bd8500 !important;
+}
+
+.search__tag .type-badge--ice,
+.details__filtr .type-badge--ice {
+  background-color: #d9f4fa !important;
+  color: #399bb5 !important;
+}
+
+.search__tag .type-badge--fighting,
+.details__filtr .type-badge--fighting {
+  background-color: #ffdedb !important;
+  color: #d94b43 !important;
+}
+
+.search__tag .type-badge--poison,
+.details__filtr .type-badge--poison {
+  background-color: #f0ddfa !important;
+  color: #9650b5 !important;
+}
+
+.search__tag .type-badge--ground,
+.details__filtr .type-badge--ground {
+  background-color: #f5e4cd !important;
+  color: #a87942 !important;
+}
+
+.search__tag .type-badge--flying,
+.details__filtr .type-badge--flying {
+  background-color: #dceaff !important;
+  color: #5285d4 !important;
+}
+
+.search__tag .type-badge--psychic,
+.details__filtr .type-badge--psychic {
+  background-color: #fbdbea !important;
+  color: #c44d91 !important;
+}
+
+.search__tag .type-badge--bug,
+.details__filtr .type-badge--bug {
+  background-color: #e5f3c9 !important;
+  color: #719b32 !important;
+}
+
+.search__tag .type-badge--rock,
+.details__filtr .type-badge--rock {
+  background-color: #ead9c4 !important;
+  color: #947047 !important;
+}
+
+.search__tag .type-badge--ghost,
+.details__filtr .type-badge--ghost {
+  background-color: #e6defa !important;
+  color: #8061bd !important;
+}
+
+.search__tag .type-badge--dragon,
+.details__filtr .type-badge--dragon {
+  background-color: #d9e1ff !important;
+  color: #526bd0 !important;
+}
+
+.search__tag .type-badge--dark,
+.details__filtr .type-badge--dark {
+  background-color: #d9dee5 !important;
+  color: #4b5563 !important;
+}
+
+.search__tag .type-badge--steel,
+.details__filtr .type-badge--steel {
+  background-color: #dce7ed !important;
+  color: #607d8b !important;
+}
+
+.search__tag .type-badge--fairy,
+.details__filtr .type-badge--fairy {
+  background-color: #f9dff2 !important;
+  color: #bb65a3 !important;
+}
+
+.search__item {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.search__item:hover {
+  transform: translateY(-4px);
+}
+
+.search__link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.search__link img {
+  width: 100%;
+  max-height: 190px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.search__id {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #718096;
+}
+
+.search__name {
+  margin: 0;
+  text-transform: capitalize;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

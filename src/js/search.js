@@ -28,38 +28,66 @@ const typesCache = new Map();
 const pokemonCache = new Map();
 
 // Відображення покемонів
+
 function renderImages(array) {
   const images = array.map(({ id, name, types, sprites }) => {
     const image =
-      sprites.other?.['official-artwork']?.front_default ||
-      sprites.front_default;
+      sprites.other?.["official-artwork"]?.front_default ||
+      sprites.front_default ||
+      "";
 
-    const pokemonTypes = types.map(type => type.type.name).join(', ');
+    // Типи покемона з оригінальними назвами з API
+    const pokemonTypes = types.map(({ type }) => `
+      <span class="type-badge type-badge--${type.name}">
+        ${type.name}
+      </span>
+    `).join("");
+
+    // ID у форматі #001
+    const formattedId = `#${String(id).padStart(3, "0")}`;
 
     return `
       <li class="search__item">
-    <a href="" class="search__link">
-        <img src="${image || ''}" alt="${name}">
-        <p class="search__id">${id}</p>
-        <h3 class="search__name">${name}</h3>
-        <h4 class="search__tag">${pokemonTypes}</h4>
+
+        <a
+          href="./details.html?id=${id}"
+          class="search__link"
+        >
+          <img
+            src="${image}"
+            alt="${name}"
+            loading="lazy"
+          >
+
+          <p class="search__id">${formattedId}</p>
+
+          <h3 class="search__name">${name}</h3>
+
+          <div class="search__tag">
+            ${pokemonTypes}
+          </div>
+        </a>
 
         <label class="search__fav">
           <input
             type="checkbox"
             class="search__checkbox"
             data-id="${id}"
+            aria-label="Додати ${name} до обраного"
           >
+
           <svg class="search__icon search__icon--fav">
             <use href="${symbolDefsUrl}#heart"></use>
           </svg>
         </label>
-        </a>
-      </li>`;
-  }).join('');
+
+      </li>
+    `;
+  }).join("");
 
   listRef.innerHTML = images;
 }
+
 
 // Звичайне завантаження покемонів з пагінацією
 async function loadPokemons() {
@@ -296,3 +324,4 @@ activeFiltersRef.addEventListener('click', async event => {
 
   await applyFilters();
 });
+
