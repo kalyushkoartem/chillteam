@@ -1,3 +1,4 @@
+
 import symbolDefsUrl from '../img/symbol-defs.svg?url';
 import { getPokemons } from './api/getPokemon';
 
@@ -5,7 +6,6 @@ const API_URL = 'https://pokeapi.co/api/v2';
 
 const listRef = document.querySelector('.search__list');
 const loadMoreBtn = document.querySelector('.load-more');
-const searchInput = document.querySelector('.search__input');
 const dropdownRef = document.querySelector('.search__dropdown');
 const selectButtonRef = document.querySelector('.search__select');
 const selectLabelRef = document.querySelector('.search__select-label');
@@ -28,23 +28,26 @@ const typesCache = new Map();
 const pokemonCache = new Map();
 
 // Відображення покемонів
-
 function renderImages(array) {
   const images = array.map(({ id, name, types, sprites }) => {
     const image =
-      sprites.other?.["official-artwork"]?.front_default ||
+      sprites.other?.['official-artwork']?.front_default ||
       sprites.front_default ||
-      "";
+      '';
 
     // Типи покемона з оригінальними назвами з API
-    const pokemonTypes = types.map(({ type }) => `
-      <span class="type-badge type-badge--${type.name}">
-        ${type.name}
-      </span>
-    `).join("");
+    const pokemonTypes = types
+      .map(
+        ({ type }) => `
+          <span class="type-badge type-badge--${type.name}">
+            ${type.name}
+          </span>
+        `
+      )
+      .join('');
 
     // ID у форматі #001
-    const formattedId = `#${String(id).padStart(3, "0")}`;
+    const formattedId = `#${String(id).padStart(3, '0')}`;
 
     return `
       <li class="search__item">
@@ -83,11 +86,10 @@ function renderImages(array) {
 
       </li>
     `;
-  }).join("");
+  }).join('');
 
   listRef.innerHTML = images;
 }
-
 
 // Звичайне завантаження покемонів з пагінацією
 async function loadPokemons() {
@@ -100,6 +102,7 @@ async function loadPokemons() {
     const data = await getPokemons(perPage, currentPage);
 
     if (!data) return;
+
     totalPokemonCount = data.count;
     loadedPokemons = [...loadedPokemons, ...data.results];
 
@@ -175,11 +178,9 @@ async function getPokemonByTypes(types) {
   );
 }
 
-// Основна функція фільтрації
+// Основна функція фільтрації за типами
 async function applyFilters() {
   const requestId = ++filterRequestId;
-
-  const query = searchInput.value.trim().toLowerCase();
 
   renderActiveFilters();
 
@@ -194,15 +195,11 @@ async function applyFilters() {
 
     if (requestId !== filterRequestId) return;
 
-    pokemons = pokemons.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(query)
-    );
-
     renderImages(pokemons);
 
     // Оновлюємо кількість знайдених покемонів
     const foundCount =
-      selectedTypes.length === 0 && query === ''
+      selectedTypes.length === 0
         ? totalPokemonCount
         : pokemons.length;
 
@@ -215,9 +212,11 @@ async function applyFilters() {
     console.error('Помилка фільтрації:', error);
   }
 }
-// Вибір типу
+
+// Відкриття меню вибору типу
 selectButtonRef.addEventListener('click', () => {
-  const isOpen = selectButtonRef.getAttribute('aria-expanded') === 'true';
+  const isOpen =
+    selectButtonRef.getAttribute('aria-expanded') === 'true';
 
   selectButtonRef.setAttribute('aria-expanded', String(!isOpen));
   optionsRef.hidden = isOpen;
@@ -285,15 +284,13 @@ document.addEventListener('keydown', event => {
 
 updateDropdown();
 
-// Пошук за назвою
-searchInput.addEventListener('input', applyFilters);
-
 // Кнопка завантаження наступної сторінки
 loadMoreBtn.addEventListener('click', loadPokemons);
 
 // Перше завантаження
 loadPokemons();
 
+// Відображення активних фільтрів
 function renderActiveFilters() {
   activeFiltersRef.innerHTML = selectedTypes
     .map(
@@ -311,6 +308,7 @@ function renderActiveFilters() {
     .join('');
 }
 
+// Видалення активного фільтра
 activeFiltersRef.addEventListener('click', async event => {
   const button = event.target.closest('.search__active-filter');
 
@@ -322,6 +320,7 @@ activeFiltersRef.addEventListener('click', async event => {
     selectedType => selectedType !== type
   );
 
+  updateDropdown();
+
   await applyFilters();
 });
-
