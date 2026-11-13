@@ -1,4 +1,4 @@
-
+import symbolDefsUrl from '../img/symbol-defs.svg?url';
 import { getPokemons } from './api/getPokemon';
 
 const API_URL = 'https://pokeapi.co/api/v2';
@@ -51,7 +51,7 @@ function renderImages(array) {
             data-id="${id}"
           >
           <svg class="search__icon search__icon--fav">
-            <use href="./img/symbol-defs.svg#heart"></use>
+            <use href="${symbolDefsUrl}#heart"></use>
           </svg>
         </label>
         </a>
