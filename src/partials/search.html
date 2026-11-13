@@ -11,31 +11,138 @@
         />
       </div>
     <div class="search__dropdown">
-      <select class="search__select">
-        <option value="all">Усі типи</option>
-        <option value="type1">Normal</option>
-        <option value="type2">Fire</option>
-        <option value="type1">Water</option>
-        <option value="type2">Grass</option>
-        <option value="type1">Electric</option>
-        <option value="type2">Ice</option>
-        <option value="type1">Fighting</option>
-        <option value="type2">Poison</option>
-        <option value="type1">Ground</option>
-        <option value="type2">Flying</option>
-        <option value="type1">Psychic</option>
-        <option value="type2">Bug</option>
-        <option value="type1">Rock</option>
-        <option value="type2">Ghost</option>
-        <option value="type1">Dragon</option>
-        <option value="type2">Dark</option>
-        <option value="type1">Steel</option>
-        <option value="type2">Fairy</option>
-      </select>
-        <svg class="search__icon search__icon--arrow">
-          <use href="./img/symbol-defs.svg#chevron-down"></use>
-        </svg>
-    </div>
+  <button
+    class="search__select"
+    type="button"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <span class="search__select-label">Усі типи</span>
+    <svg class="search__icon search__icon--arrow">
+      <use href="./img/symbol-defs.svg#chevron-down"></use>
+    </svg>
+  </button>
+
+  <div class="search__options" hidden>
+    <button class="search__option" type="button" data-type="all">
+      <span class="search__type-dot"></span>
+      Усі типи
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+
+    <button class="search__option" type="button" data-type="normal">
+      <span class="search__type-dot"></span>Normal
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="fire">
+      <span class="search__type-dot"></span>Fire
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="water">
+      <span class="search__type-dot"></span>Water
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="grass">
+      <span class="search__type-dot"></span>Grass
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="electric">
+      <span class="search__type-dot"></span>Electric
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="ice">
+      <span class="search__type-dot"></span>Ice
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="fighting">
+      <span class="search__type-dot"></span>Fighting
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="poison">
+      <span class="search__type-dot"></span>Poison
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="ground">
+      <span class="search__type-dot"></span>Ground
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="flying">
+      <span class="search__type-dot"></span>Flying
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="psychic">
+      <span class="search__type-dot"></span>Psychic
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="bug">
+      <span class="search__type-dot"></span>Bug
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="rock">
+      <span class="search__type-dot"></span>Rock
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="ghost">
+      <span class="search__type-dot"></span>Ghost
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="dragon">
+      <span class="search__type-dot"></span>Dragon
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="dark">
+      <span class="search__type-dot"></span>Dark
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="steel">
+      <span class="search__type-dot"></span>Steel
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+    <button class="search__option" type="button" data-type="fairy">
+      <span class="search__type-dot"></span>Fairy
+      <svg class="search__option-check" aria-hidden="true">
+  <use href="./img/symbol-defs.svg#check"></use>
+</svg>
+    </button>
+  </div>
+</div>
+
      <button class="search__btn">
         <svg class="search__icon search__icon--btn">
           <use href="./img/symbol-defs.svg#dice-five"></use>
@@ -46,23 +153,12 @@
 
 </div>
     <p class="search__text">знайдено:</p>
+    <div class="search__active-filters"></div>
     <ul class="search__list">
 
     </ul>
-    
     <button class="search__load load-more" type="button">
   Load more
 </button>
   </div>
 </section>
-
-  <!-- <svg class="svg-test__icon" viewBox="0 0 24 24">
-    <path
-      d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676
-      0.56 0.56 0 0 0 0.818 0
-      A5.49 5.49 0 0 1 22 9.5
-      c0 2.29-1.5 4-3 5.5
-      l-5.492 5.313a2 2 0 0 1-3 0.019
-      L5 15c-1.5-1.5-3-3.2-3-5.5"
-    />
-  </svg> -->

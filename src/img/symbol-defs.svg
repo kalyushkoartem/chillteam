@@ -74,6 +74,9 @@
         <symbol id="chevron-down" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" xmlns:xlink="http://www.w3.org/1999/xlink">
             <path d="M6 9l6 6 6-6" />
         </symbol>
+        <symbol id="check" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="M20 6 9 17 4 12" />
+</symbol>
         <symbol id="shuffle" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" xmlns:xlink="http://www.w3.org/1999/xlink">
             <path d="M18 14l4 4-4 4" />
             <path d="M18 2l4 4-4 4" />
