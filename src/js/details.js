@@ -1,237 +1,430 @@
-const backLink = document.querySelector('.details__link');
 
-if (backLink) {
-  backLink.addEventListener('click', (event) => {
-    event.preventDefault(); 
-    if (window.history.length > 1 && document.referrer.includes(window.location.host)) {
-      window.history.back();
-    } else {
-      window.location.href = './index.html';
-    }
-  });
-}
-
-
-
-
-
-// Якщо в папці api всередині js:
 import { getPokemonById } from "./api/getPokemon.js";
 
-
-
+// Отримуємо ID покемона з URL
 const params = new URLSearchParams(window.location.search);
-const pokemonId = Number(params.get("id")) || 25;
+const requestedId = Number(params.get("id"));
+const pokemonId = Number.isInteger(requestedId) && requestedId > 0
+  ? requestedId
+  : 25;
 
-const typesUa = {
-  electric: "Електричний", fire: "Вогняний", water: "Водяний", grass: "Травʼяний",
-  normal: "Звичайний", poison: "Отруйний", flying: "Літаючий", bug: "Комаха",
-  ground: "Земляний", fairy: "Чарівний", psychic: "Психічний", rock: "Камʼяний",
-  ice: "Крижаний", dragon: "Драконячий", ghost: "Примарний", steel: "Сталевий",
-  fighting: "Бойовий", dark: "Темний"
-};
 
-const gensUa = {
-  "generation-i": "Покоління I", "generation-ii": "Покоління II",
-  "generation-iii": "Покоління III", "generation-iv": "Покоління IV",
-  "generation-v": "Покоління V", "generation-vi": "Покоління VI",
-  "generation-vii": "Покоління VII", "generation-viii": "Покоління VIII",
-  "generation-ix": "Покоління IX"
-};
-
+// Допоміжні функції
 const fmtId = (id) => "#" + String(id).padStart(3, "0");
-const cap = (str) => (str ? str.charAt(0).toUpperCase() + str.slice(1) : "");
 
-async function renderPokemonDetails(id) {
-  // Використовуємо вашу функцію з getPokemon.js
-  const pokemon = await getPokemonById(id);
-  if (!pokemon) return;
+const cap = (str) =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
 
-  // Завантажуємо дані виду (опис, покоління, еволюція)
-  const speciesRes = await fetch(pokemon.species.url);
-  const species = await speciesRes.json();
+const getArtwork = (id) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
-  // Заповнюємо ID та покоління
-  const idText = fmtId(pokemon.id);
-  const genText = gensUa[species.generation.name] || species.generation.name;
-  const idEls = document.querySelectorAll(".details__pokemonid");
-  if (idEls.item(0)) idEls.item(0).textContent = idText;
-  if (idEls.item(1)) idEls.item(1).textContent = `${idText} · ${genText}`;
+// Завантаження JSON
+async function fetchJson(url) {
+  const response = await fetch(url);
 
-  // Головне фото та ім'я
-  const imgEl = document.querySelector(".details__img");
-  if (imgEl) {
-    imgEl.src = pokemon.sprites.other["official-artwork"].front_default || pokemon.sprites.front_default;
-    imgEl.alt = pokemon.name;
-  }
-  const nameEl = document.querySelector(".details__name");
-  if (nameEl) nameEl.textContent = pokemon.name;
-
-  // Категорія та опис
-  const genusObj = species.genera.find((g) => g.language.name === "en");
-  const genusEl = document.querySelector(".details__genus");
-  if (genusEl) genusEl.textContent = genusObj ? genusObj.genus : "";
-
-  const flavorObj = species.flavor_text_entries.find((f) => f.language.name === "en");
-  const descEl = document.querySelector(".details__description");
-  if (descEl) {
-    descEl.textContent = flavorObj ? flavorObj.flavor_text.replace(/[\f\n\r]+/g, " ") : "";
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
   }
 
-  // Типи
-  const filtrEl = document.querySelector(".details__filtr");
-  if (filtrEl) {
-    filtrEl.innerHTML = pokemon.types
-      .map((t) => `<span class="type-badge">${typesUa[t.type.name] || t.type.name}</span>`)
-      .join("");
-  }
-
-  // Зріст, вага, здібність
-  const hEl = document.querySelector(".details__height .details__text");
-  const wEl = document.querySelector(".details__weight .details__text");
-  const aEl = document.querySelector(".details__capability .details__text");
-  if (hEl) hEl.textContent = `${(pokemon.height / 10).toFixed(1).replace(".", ",")} м`;
-  if (wEl) wEl.textContent = `${(pokemon.weight / 10).toFixed(1).replace(".", ",")} кг`;
-  const abName = pokemon.abilities.at(0)?.ability?.name || "—";
-  if (aEl) aEl.textContent = cap(abName.replace("-", " "));
-
-  // Характеристики
-  const statRows = document.querySelectorAll(".stat-row");
-  let total = 0;
-  pokemon.stats.forEach((st, idx) => {
-    total += st.base_stat;
-    const row = statRows.item(idx);
-    if (row) {
-      const valEl = row.querySelector(".stat-value");
-      const barEl = row.querySelector(".progress-bar");
-      if (valEl) valEl.textContent = st.base_stat;
-      if (barEl) barEl.style.width = `${Math.min(Math.round((st.base_stat / 200) * 100), 100)}%`;
-    }
-  });
-  const totalEl = document.querySelector(".details__total");
-  if (totalEl) totalEl.textContent = `Разом: ${total}`;
-
-  // Еволюція
-  const evoRes = await fetch(species.evolution_chain.url);
-  const evoData = await evoRes.json();
-  renderEvolution(evoData.chain, pokemon.species.name);
-
-  // Нижня навігація, обране і кнопка назад
-  await renderFooterNav(pokemon.id);
-  setupFavorites(pokemon.id);
-  setupBackButton();
+  return response.json();
 }
 
+// Головна функція
+async function renderPokemonDetails(id) {
+  try {
+    const pokemon = await getPokemonById(id);
+
+    if (!pokemon) {
+      throw new Error("Покемона не знайдено");
+    }
+
+    const species = await fetchJson(pokemon.species.url);
+
+    // ID та покоління
+    const idText = fmtId(pokemon.id);
+
+    const genText = species.generation.name
+    .replace("generation-", "Generation ")
+     .replace(/\b(i|ii|iii|iv|v|vi|vii|viii|ix)\b/i, (match) =>
+    match.toUpperCase()
+  );
+    const idEls = document.querySelectorAll(
+      ".details__pokemonid"
+    );
+
+    if (idEls[0]) {
+      idEls[0].textContent = idText;
+    }
+
+    if (idEls[1]) {
+      idEls[1].textContent = `${idText} · ${genText}`;
+    }
+
+    // Фото
+    const imgEl = document.querySelector(".details__img");
+
+    if (imgEl) {
+      imgEl.src =
+        pokemon.sprites.other?.["official-artwork"]
+          ?.front_default ||
+        pokemon.sprites.front_default ||
+        getArtwork(pokemon.id);
+
+      imgEl.alt = pokemon.name;
+    }
+
+    // Ім'я
+    const nameEl = document.querySelector(".details__name");
+
+    if (nameEl) {
+      nameEl.textContent = cap(pokemon.name);
+    }
+
+    // Категорія
+    const genusObj = species.genera?.find(
+      (g) => g.language.name === "en"
+    );
+
+    const genusEl = document.querySelector(".details__genus");
+
+    if (genusEl) {
+      genusEl.textContent = genusObj?.genus || "";
+    }
+
+    // Опис
+    const flavorObj = species.flavor_text_entries?.find(
+      (f) => f.language.name === "en"
+    );
+
+    const descEl = document.querySelector(
+      ".details__description"
+    );
+
+    if (descEl) {
+      descEl.textContent = flavorObj
+        ? flavorObj.flavor_text.replace(/[\f\n\r]+/g, " ")
+        : "";
+    }
+
+    // Типи
+   const filtrEl = document.querySelector(".details__filtr");
+
+if (filtrEl) {
+  filtrEl.innerHTML = pokemon.types
+    .map(({ type }) => `
+      <span class="type-badge type-badge--${type.name}">
+        ${type.name}
+      </span>
+    `)
+    .join("");
+}
+    // Зріст
+    const hEl = document.querySelector(
+      ".details__height .details__text"
+    );
+
+   if (hEl) {
+  hEl.textContent = `${(pokemon.height / 10).toFixed(1)} m`;
+}
+
+    // Вага
+    const wEl = document.querySelector(
+      ".details__weight .details__text"
+    );
+
+   if (wEl) {
+  wEl.textContent = `${(pokemon.weight / 10).toFixed(1)} kg`;
+}
+
+    // Здібності
+    const aEl = document.querySelector(
+      ".details__capability .details__text"
+    );
+
+    const abilityName =
+      pokemon.abilities[0]?.ability?.name || "—";
+
+    if (aEl) {
+      aEl.textContent = cap(
+        abilityName.replaceAll("-", " ")
+      );
+    }
+
+    // Характеристики
+    const statRows = document.querySelectorAll(".stat-row");
+
+    let total = 0;
+
+    pokemon.stats.forEach((stat, index) => {
+      total += stat.base_stat;
+
+      const row = statRows[index];
+
+      if (!row) return;
+
+      const valEl = row.querySelector(".stat-value");
+      const barEl = row.querySelector(".progress-bar");
+
+      if (valEl) {
+        valEl.textContent = stat.base_stat;
+      }
+
+      if (barEl) {
+        const percent = Math.min(
+          (stat.base_stat / 200) * 100,
+          100
+        );
+
+        barEl.style.width = `${percent}%`;
+      }
+    });
+
+    const totalEl = document.querySelector(".details__total");
+
+    if (totalEl) {
+      totalEl.textContent = `Разом: ${total}`;
+    }
+
+    // Еволюція
+    if (species.evolution_chain?.url) {
+      const evoData = await fetchJson(
+        species.evolution_chain.url
+      );
+
+      renderEvolution(evoData.chain, pokemon.species.name);
+    }
+
+    // Нижня навігація
+    await renderFooterNav(pokemon.id);
+
+    // Обране
+    setupFavorites(pokemon.id);
+
+  } catch (error) {
+    console.error("Помилка завантаження Pokémon:", error);
+
+    const nameEl = document.querySelector(".details__name");
+
+    if (nameEl) {
+      nameEl.textContent = "Не вдалося завантажити Pokémon";
+    }
+  }
+}
+
+// Еволюція
 function renderEvolution(chainNode, currentName) {
   const container = document.querySelector(".evolution-chain");
+
   if (!container || !chainNode) return;
 
   const stages = [];
-  let current = chainNode;
 
-  while (current) {
-    const parts = current.species.url.split("/").filter(Boolean);
-    const evoId = parts[parts.length - 1];
-    const det = current.evolution_details && current.evolution_details[0];
+  function collectStages(node, parentId = null) {
+    const parts = node.species.url
+      .split("/")
+      .filter(Boolean);
+
+    const evoId = Number(parts.at(-1));
+    const details = node.evolution_details?.[0];
+
     let trigger = "";
 
-    if (det) {
-      if (det.min_level) trigger = "Рівень " + det.min_level;
-      else if (det.item) trigger = det.item.name.replace("-", " ");
-      else if (det.min_happiness) trigger = "Висока дружба";
-      else if (det.trigger && det.trigger.name === "trade") trigger = "Обмін";
-      else if (det.trigger && det.trigger.name) trigger = det.trigger.name.replace("-", " ");
+    if (details) {
+      if (details.min_level) {
+        trigger = `Рівень ${details.min_level}`;
+      } else if (details.item) {
+        trigger = details.item.name.replaceAll("-", " ");
+      } else if (details.min_happiness) {
+        trigger = "Висока дружба";
+      } else if (details.trigger?.name === "trade") {
+        trigger = "Обмін";
+      } else if (details.trigger?.name) {
+        trigger = details.trigger.name.replaceAll("-", " ");
+      }
     }
 
-    stages.push({ id: evoId, name: current.species.name, trigger: trigger });
-    current = current.evolves_to && current.evolves_to.length > 0 ? current.evolves_to[0] : null;
+    stages.push({
+      id: evoId,
+      name: node.species.name,
+      trigger,
+      parentId
+    });
+
+    node.evolves_to?.forEach((next) => {
+      collectStages(next, evoId);
+    });
   }
 
+  collectStages(chainNode);
+
   container.innerHTML = stages
-    .map((st, idx) => {
-      const active = st.name === currentName;
-      const imgUrl = "https://githubusercontent.com" + st.id + ".png";
-      const arrow = idx > 0
-        ? '<div class="evo-arrow-container"><div class="arrow-graphic">→</div><div>' + st.trigger + '</div></div>'
+    .map((stage) => {
+      const active = stage.name === currentName;
+
+      const arrow = stage.parentId !== null
+        ? `
+          <div class="evo-arrow-container">
+            <div class="arrow-graphic">→</div>
+            <div>${stage.trigger}</div>
+          </div>
+        `
         : "";
 
-      return arrow +
-        '<div class="evo-pokemon" onclick="window.location.search=\'?id=' + st.id + '\'">' +
-          '<div class="evo-img-container ' + (active ? "bg-yellow" : "bg-blue") + '">' +
-            '<img class="evo-img" src="' + imgUrl + '" alt="' + st.name + '">' +
-          '</div>' +
-          '<div class="evo-name" style="' + (active ? "color:#2563eb;" : "") + '">' + cap(st.name) + '</div>' +
-          '<div class="evo-id">' + fmtId(st.id) + '</div>' +
-        '</div>';
+      return `
+        ${arrow}
+
+        <div class="evo-pokemon"
+             data-id="${stage.id}"
+             role="link"
+             tabindex="0">
+
+          <div class="evo-img-container ${
+            active ? "bg-yellow" : "bg-blue"
+          }">
+            <img
+              class="evo-img"
+              src="${getArtwork(stage.id)}"
+              alt="${stage.name}"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="evo-name"
+               ${active ? 'style="color:#2563eb;"' : ""}>
+            ${cap(stage.name)}
+          </div>
+
+          <div class="evo-id">
+            ${fmtId(stage.id)}
+          </div>
+
+        </div>
+      `;
     })
     .join("");
+
+  // Перехід до вибраного покемона
+  function openEvolution(event) {
+    const target = event.target.closest(".evo-pokemon");
+
+    if (!target) return;
+
+    window.location.search = `?id=${target.dataset.id}`;
+  }
+
+  container.addEventListener("click", openEvolution);
+
+  container.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const target = event.target.closest(".evo-pokemon");
+
+    if (!target) return;
+
+    event.preventDefault();
+    window.location.search = `?id=${target.dataset.id}`;
+  });
 }
 
+// Нижня навігація
 async function renderFooterNav(id) {
-  const links = document.querySelectorAll(".pokedex-footer .nav-link");
-  const prevLink = links.item(0);
-  const nextLink = links.item(1);
+  const links = document.querySelectorAll(
+    ".pokedex-footer .nav-link"
+  );
+
+  const prevLink = links[0];
+  const nextLink = links[1];
+
   if (!prevLink || !nextLink) return;
 
   if (id > 1) {
     const prevPoke = await getPokemonById(id - 1);
+
     if (prevPoke) {
-      prevLink.textContent = `← ${fmtId(id - 1)} ${cap(prevPoke.name)}`;
-      prevLink.href = `?id=${id - 1}`;
+      prevLink.textContent =
+        `← ${fmtId(prevPoke.id)} ${cap(prevPoke.name)}`;
+
+      prevLink.href = `?id=${prevPoke.id}`;
+      prevLink.style.visibility = "visible";
+    } else {
+      prevLink.style.visibility = "hidden";
     }
   } else {
     prevLink.style.visibility = "hidden";
   }
 
   const nextPoke = await getPokemonById(id + 1);
+
   if (nextPoke) {
-    nextLink.textContent = `${fmtId(id + 1)} ${cap(nextPoke.name)} →`;
-    nextLink.href = `?id=${id + 1}`;
+    nextLink.textContent =
+      `${fmtId(nextPoke.id)} ${cap(nextPoke.name)} →`;
+
+    nextLink.href = `?id=${nextPoke.id}`;
+    nextLink.style.visibility = "visible";
   } else {
     nextLink.style.visibility = "hidden";
   }
 }
 
+// Обране
 function setupFavorites(id) {
   const topBtn = document.querySelector(".details__fav");
-  const bottomBtn = document.querySelector(".favorite-action-btn");
-  if (!topBtn || !bottomBtn) return;
+  const bottomBtn = document.querySelector(
+    ".favorite-action-btn"
+  );
 
-  const getFavs = () => JSON.parse(localStorage.getItem("pokedex_favs") || "[]");
-  const sync = () => {
+  if (!topBtn && !bottomBtn) return;
+
+  const getFavs = () => {
+    try {
+      const stored = JSON.parse(
+        localStorage.getItem("pokedex_favs") || "[]"
+      );
+
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  };
+
+  function sync() {
     const isFav = getFavs().includes(id);
-    topBtn.classList.toggle("active", isFav);
-    bottomBtn.classList.toggle("is-fav", isFav);
-    bottomBtn.innerHTML = isFav
-      ? '<span class="heart-icon">♥</span> В обраному'
-      : '<span class="heart-icon">♡</span> Додати до обраного';
-  };
 
-  const toggle = () => {
+    if (topBtn) {
+      topBtn.classList.toggle("active", isFav);
+      topBtn.setAttribute("aria-pressed", String(isFav));
+    }
+
+    if (bottomBtn) {
+      bottomBtn.classList.toggle("is-fav", isFav);
+
+      bottomBtn.innerHTML = isFav
+        ? '<span class="heart-icon">♥</span> В обраному'
+        : '<span class="heart-icon">♡</span> Додати до обраного';
+    }
+  }
+
+  function toggle() {
     const favs = getFavs();
-    const updated = favs.includes(id) ? favs.filter((x) => x !== id) : [...favs, id];
-    localStorage.setItem("pokedex_favs", JSON.stringify(updated));
-    sync();
-  };
 
-  topBtn.onclick = toggle;
-  bottomBtn.onclick = toggle;
+    const updated = favs.includes(id)
+      ? favs.filter((x) => x !== id)
+      : [...favs, id];
+
+    localStorage.setItem(
+      "pokedex_favs",
+      JSON.stringify(updated)
+    );
+
+    sync();
+  }
+
+  if (topBtn) topBtn.onclick = toggle;
+  if (bottomBtn) bottomBtn.onclick = toggle;
+
   sync();
 }
 
-function setupBackButton() {
-  const link = document.querySelector(".details__link");
-  if (!link) return;
 
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (window.history.length > 1 && document.referrer.includes(window.location.host)) {
-      window.history.back();
-    } else {
-      window.location.href = "./index.html";
-    }
-  });
-}
-
+// Запуск
 renderPokemonDetails(pokemonId);
-

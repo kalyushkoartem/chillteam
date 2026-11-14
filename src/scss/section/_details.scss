@@ -145,17 +145,9 @@ body {
 .details__filtr {
   grid-column: 1 / 4;
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 7px;
   margin: 4px 0;
-}
-
-.type-badge {
-  background-color: #fde047;
-  color: #713f12;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 999px;
 }
 
 .details__description {
