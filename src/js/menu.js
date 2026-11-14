@@ -1,3 +1,4 @@
+import symbolDefsUrl from '../img/symbol-defs.svg?url';
 const openModal = document.querySelector(".open-modal");
 const modal = document.querySelector(".modal");
 const closeModal = document.querySelector(".modal__close");
@@ -70,7 +71,10 @@ async function getRandomPokemon() {
     pokemon.types.forEach((type) => {
       const span = document.createElement("span");
 
-      span.classList.add("pokemon__type");
+      span.classList.add(
+  "pokemon__type",
+  `type-badge--${type.type.name}`
+);
       span.textContent = type.type.name;
 
       pokemonTypes.appendChild(span);
@@ -101,7 +105,13 @@ async function getRandomPokemon() {
       pokemonStats.appendChild(statElement);
     });
 
-    randomBtn.textContent = "🎲 Дослідити ще";
+    randomBtn.innerHTML = `
+      <svg class="menu__icon">
+    <use href="./img/symbol-defs.svg#dice-five"></use>
+  </svg>
+  Дослідити ще
+
+`;
 
   } catch (error) {
     console.error(error);

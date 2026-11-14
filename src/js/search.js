@@ -16,7 +16,7 @@ const activeFiltersRef = document.querySelector(
 const foundCountRef = document.querySelector('.search__text');
 
 let totalPokemonCount = 0;
-
+let searchQuery = '';
 let selectedTypes = [];
 let currentPage = 1;
 const perPage = 20;
@@ -178,7 +178,6 @@ async function getPokemonByTypes(types) {
   );
 }
 
-// Основна функція фільтрації за типами
 async function applyFilters() {
   const requestId = ++filterRequestId;
 
@@ -187,7 +186,9 @@ async function applyFilters() {
   try {
     let pokemons;
 
-    if (selectedTypes.length > 0) {
+    if (searchQuery) {
+      pokemons = await searchPokemonByName(searchQuery);
+    } else if (selectedTypes.length > 0) {
       pokemons = await getPokemonByTypes(selectedTypes);
     } else {
       pokemons = loadedPokemons;
@@ -195,24 +196,73 @@ async function applyFilters() {
 
     if (requestId !== filterRequestId) return;
 
+    // Якщо вибрані типи — залишаємо покемонів,
+    // які мають усі вибрані типи
+    if (searchQuery && selectedTypes.length > 0) {
+      pokemons = pokemons.filter(pokemon =>
+        selectedTypes.every(type =>
+          pokemon.types.some(item => item.type.name === type)
+        )
+      );
+    }
+
     renderImages(pokemons);
 
-    // Оновлюємо кількість знайдених покемонів
-    const foundCount =
-      selectedTypes.length === 0
-        ? totalPokemonCount
-        : pokemons.length;
-
-    foundCountRef.textContent = `Знайдено: ${foundCount}`;
+    foundCountRef.textContent = `Знайдено: ${pokemons.length}`;
 
     loadMoreBtn.style.display =
-      selectedTypes.length > 0 ? 'none' : '';
+      searchQuery || selectedTypes.length > 0 ? 'none' : '';
 
   } catch (error) {
     console.error('Помилка фільтрації:', error);
   }
 }
+// Кеш усіх імен покемонів
+let allPokemonNames = [];
+let nameSearchRequestId = 0;
 
+// Пошук покемонів за частиною імені
+async function searchPokemonByName(name) {
+  try {
+    const query = name.trim().toLowerCase();
+
+    if (!query) return [];
+
+    // Завантажуємо список імен лише один раз
+    if (allPokemonNames.length === 0) {
+      const response = await fetch(`${API_URL}/pokemon?limit=2000`);
+
+      if (!response.ok) {
+        throw new Error('Помилка отримання списку покемонів');
+      }
+
+      const data = await response.json();
+      allPokemonNames = data.results;
+    }
+
+    // Шукаємо збіги після кожної введеної букви
+    const matches = allPokemonNames
+      .filter(pokemon => pokemon.name.includes(query))
+      .slice(0, 20);
+
+    // Отримуємо повну інформацію для карток
+    return await Promise.all(
+      matches.map(pokemon => fetchPokemon(pokemon.url))
+    );
+
+  } catch (error) {
+    console.error('Помилка пошуку покемона:', error);
+    return [];
+  }
+}
+
+const searchInputRef = document.querySelector('.search__input');
+
+searchInputRef.addEventListener('input', async event => {
+  searchQuery = event.target.value.trim().toLowerCase();
+
+  await applyFilters();
+});
 // Відкриття меню вибору типу
 selectButtonRef.addEventListener('click', () => {
   const isOpen =
