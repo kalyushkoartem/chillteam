@@ -175,6 +175,10 @@ body {
   }
 
   &__random {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     margin-top: 35px;
     padding: 18px;
@@ -237,4 +241,71 @@ body {
       grid-template-columns: 80px 1fr 30px;
     }
   }
+}
+.menu__icon {
+  stroke: currentColor;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+// ======================================
+// POKEMON TYPES — MODAL
+// ======================================
+
+.pokemon {
+  &__types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 30px;
+  }
+
+  &__type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+
+    color: inherit;
+  }
+
+  &__type:nth-child(1) {
+    background-color: #e2e8f0;
+    color: #64748b;
+  }
+}
+
+
+
+
+
+
+.pokemon__type {
+  &.type-badge--normal { background: #e2e8f0; color: #64748b; }
+  &.type-badge--fire { background: #ffe0dc; color: #e85b50; }
+  &.type-badge--water { background: #dbeafe; color: #3478d4; }
+  &.type-badge--grass { background: #d9f5df; color: #399b57; }
+  &.type-badge--electric { background: #fff0bd; color: #bd8500; }
+  &.type-badge--ice { background: #d9f4fa; color: #399bb5; }
+  &.type-badge--fighting { background: #ffdedb; color: #d94b43; }
+  &.type-badge--poison { background: #f0ddfa; color: #9650b5; }
+  &.type-badge--ground { background: #f5e4cd; color: #a87942; }
+  &.type-badge--flying { background: #dceaff; color: #5285d4; }
+  &.type-badge--psychic { background: #fbdbea; color: #c44d91; }
+  &.type-badge--bug { background: #e5f3c9; color: #719b32; }
+  &.type-badge--rock { background: #ead9c4; color: #947047; }
+  &.type-badge--ghost { background: #e6defa; color: #8061bd; }
+  &.type-badge--dragon { background: #d9e1ff; color: #526bd0; }
+  &.type-badge--dark { background: #d9dee5; color: #4b5563; }
+  &.type-badge--steel { background: #dce7ed; color: #607d8b; }
+  &.type-badge--fairy { background: #f9dff2; color: #bb65a3; }
 }
