@@ -965,7 +965,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0 auto;
 }
 
-/* Посилання назад */
 .details__link {
   display: inline-flex;
   align-items: center;
@@ -976,18 +975,14 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 14px;
   margin-bottom: 20px;
 }
-
 .details__link:hover {
   text-decoration: underline;
 }
-
 .details__icon {
   width: 16px;
   height: 16px;
   fill: currentColor;
 }
-
-/* Головна біла картка */
 .details__box {
   background-color: #ffffff;
   border-radius: 20px;
@@ -999,8 +994,6 @@ input[type=number]::-webkit-outer-spin-button {
        column-gap: 40px;
   align-items: start;
 }
-
-/* Ліва колонка: зображення покемона */
 .details__imgbox {
   grid-column: 1/2;
   grid-row: 1/5;
@@ -1013,14 +1006,12 @@ input[type=number]::-webkit-outer-spin-button {
   min-height: 460px;
   position: relative;
 }
-
 .details__imgbox .details__pokemonid {
   font-weight: 700;
   font-size: 16px;
   color: #854d0e;
   align-self: flex-start;
 }
-
 .details__img {
   width: 240px;
   height: 240px;
@@ -1029,15 +1020,12 @@ input[type=number]::-webkit-outer-spin-button {
   margin: auto;
   filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.12));
 }
-
 .details__genus {
   text-align: center;
   color: #854d0e;
   font-size: 14px;
   font-weight: 500;
 }
-
-/* Права колонка: основна інформація */
 .details__infobox {
   grid-column: 2/3;
   display: grid;
@@ -1046,14 +1034,12 @@ input[type=number]::-webkit-outer-spin-button {
   position: relative;
   margin-bottom: 24px;
 }
-
 .details__infobox .details__pokemonid {
   grid-column: 1/3;
   font-size: 13px;
   color: #64748b;
   font-weight: 500;
 }
-
 .details__name {
   grid-column: 1/3;
   font-size: 36px;
@@ -1062,8 +1048,6 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 1.1;
   text-transform: capitalize;
 }
-
-/* Кнопка сердечка зверху справа */
 .details__fav {
   position: absolute;
   top: 0;
@@ -1080,18 +1064,14 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
-
 .details__fav:hover {
   transform: scale(1.05);
   background-color: #fee2e2;
 }
-
 .details__fav.active {
   background-color: #ef4444;
   color: #ffffff;
 }
-
-/* Бейджі типів */
 .details__filtr {
   grid-column: 1/4;
   display: flex;
@@ -1099,24 +1079,18 @@ input[type=number]::-webkit-outer-spin-button {
   gap: 7px;
   margin: 4px 0;
 }
-
 .details__description {
   grid-column: 1/4;
   font-size: 14px;
   color: #475569;
   margin-bottom: 8px;
 }
-
-/* Картки параметрів (Зріст, Вага, Здібність) */
-.details__height,
-.details__weight,
-.details__capability {
+.details__height, .details__weight, .details__capability {
   background-color: #f8fafc;
   border: 1px solid #f1f5f9;
   border-radius: 12px;
   padding: 12px 16px;
 }
-
 .details__label {
   display: flex;
   align-items: center;
@@ -1126,14 +1100,11 @@ input[type=number]::-webkit-outer-spin-button {
   color: #64748b;
   margin-bottom: 4px;
 }
-
 .details__text {
   font-size: 15px;
   font-weight: 700;
   color: #0f172a;
 }
-
-/* Заголовок характеристик */
 .details__stats {
   grid-column: 2/3;
   display: flex;
@@ -1141,20 +1112,17 @@ input[type=number]::-webkit-outer-spin-button {
   align-items: center;
   margin-bottom: 14px;
 }
-
 .details__title {
   font-size: 16px;
   font-weight: 700;
   color: #0f172a;
 }
-
 .details__total {
   font-size: 13px;
   font-weight: 600;
   color: #64748b;
 }
 
-/* Список прогрес-барів */
 .stats-list {
   grid-column: 2/3;
   display: flex;
@@ -1188,7 +1156,6 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 999px;
   overflow: hidden;
 }
-
 .progress-bar {
   height: 100%;
   border-radius: 999px;
@@ -1198,12 +1165,10 @@ input[type=number]::-webkit-outer-spin-button {
 .bg-yellow {
   background-color: #facc15;
 }
-
 .bg-blue {
   background-color: #2563eb;
 }
 
-/* Синя кнопка "Додати до обраного" */
 .favorite-action-btn {
   grid-column: 2/3;
   justify-self: start;
@@ -1220,30 +1185,25 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
 .favorite-action-btn:hover {
   background-color: #1d4ed8;
 }
-
 .favorite-action-btn.is-fav {
   background-color: #ef4444;
 }
 
-/* Блок еволюції (на всю ширину картки знизу) */
 .evolution-wrapper {
   grid-column: 1/3;
   margin-top: 40px;
   padding-top: 32px;
   border-top: 1px solid #f1f5f9;
 }
-
 .evolution-title {
   font-size: 18px;
   font-weight: 700;
   color: #0f172a;
   margin-bottom: 24px;
 }
-
 .evolution-chain {
   display: flex;
   align-items: center;
@@ -1259,7 +1219,9 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
   cursor: pointer;
 }
-
+.evo-pokemon:hover .evo-img-container {
+  transform: translateY(-4px);
+}
 .evo-img-container {
   width: 120px;
   height: 120px;
@@ -1270,38 +1232,28 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 10px;
   transition: transform 0.2s ease;
 }
-
-.evo-pokemon:hover .evo-img-container {
-  transform: translateY(-4px);
-}
-
 .evo-img-container.bg-blue {
   background-color: #f1f5f9;
 }
-
 .evo-img-container.bg-yellow {
   background-color: #fef9c3;
   border: 2px solid #fde047;
 }
-
 .evo-img {
   width: 84px;
   height: 84px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-
 .evo-name {
   font-size: 14px;
   font-weight: 700;
   color: #0f172a;
 }
-
 .evo-id {
   font-size: 12px;
   color: #94a3b8;
 }
-
 .evo-arrow-container {
   display: flex;
   flex-direction: column;
@@ -1315,7 +1267,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 4px;
 }
 
-/* Футер навігації (Попередній / Наступний) */
 .pokedex-footer {
   grid-column: 1/3;
   display: flex;
@@ -1332,16 +1283,13 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 14px;
   font-weight: 600;
 }
-
 .nav-link:first-child {
   color: #94a3b8;
 }
-
 .nav-link:hover {
   text-decoration: underline;
 }
 
-/* Адаптивність для планшетів та телефонів */
 @media (max-width: 860px) {
   .details__box {
     grid-template-columns: 1fr;
@@ -1353,8 +1301,9 @@ input[type=number]::-webkit-outer-spin-button {
     min-height: 320px;
     margin-bottom: 24px;
   }
-  .details__infobox,
-  .details__stats,
+  .details__infobox, .details__stats {
+    grid-column: 1/2;
+  }
   .stats-list,
   .favorite-action-btn,
   .evolution-wrapper,
@@ -1362,6 +1311,70 @@ input[type=number]::-webkit-outer-spin-button {
     grid-column: 1/2;
   }
 }
+.notfound {
+  width: 100%;
+  padding: 50px 20px;
+  text-align: center;
+}
+.notfound[hidden] {
+  display: none;
+}
+.notfound__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 190px;
+  height: 190px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  background: #f0f7ff;
+}
+.notfound__image img {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  opacity: 0.75;
+}
+.notfound__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #142b50;
+  margin-bottom: 12px;
+}
+.notfound__text {
+  font-size: 15px;
+  color: #8190a8;
+  margin-bottom: 30px;
+}
+.notfound__backbtn {
+  display: block;
+  margin: 0 auto 18px;
+  padding: 13px 30px;
+  border: none;
+  border-radius: 12px;
+  background: #2f80ed;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.notfound__backbtn:hover {
+  background: #1765ce;
+}
+.notfound__clearbtn {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  background: transparent;
+  color: #2f80ed;
+  font-weight: 600;
+  cursor: pointer;
+}
+.notfound__clearbtn:hover {
+  text-decoration: underline;
+}
+
 * {
   margin: 0;
   padding: 0;
