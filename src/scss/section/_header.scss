@@ -1,21 +1,5 @@
 @use "../base/var" as *;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: $color-bg-white;
-}
-
-.container {
-  max-width: $container-width;
-  margin: 0 auto;
-  padding: 0 20px;
-}
 
 .header {
   width: 100%;
@@ -37,8 +21,9 @@ body {
     gap: 10px;
     text-decoration: none;
     color: $color-text-main;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: 700;
+    margin-right: 550px;
 
     // Якщо замість порожнього img використовуватимеш SVG або збережеш CSS-покебол
     img {
@@ -58,6 +43,7 @@ body {
     gap: 32px;
     list-style: none;
     height: 100%;
+    margin-right: 60px;
   }
 
   &__item {
@@ -81,7 +67,8 @@ body {
       &:hover {
         color: $color-btn-text; // При ховері стають синіми
       }
-    }
+
+
 
     // Лінія підкреслення (анімація для ховеру та активної сторінки)
     &::after {
@@ -113,6 +100,8 @@ body {
     }
   }
 
+
+}
   &__btn {
     border: 1px solid $color-btn-border;
     background-color: $color-btn-bg;
@@ -132,4 +121,10 @@ body {
       border-color: $color-btnborder-hover;
     }
   }
+   &__svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+   }
 }
