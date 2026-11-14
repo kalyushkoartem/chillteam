@@ -1,9 +1,16 @@
 
 import symbolDefsUrl from '../img/symbol-defs.svg?url';
-import { getPokemons } from './api/getPokemon';
 
+import {
+  getPokemons,
+  getPokemonById,
+  getPokemonByName,
+} from './api/getPokemon';
+
+// API URL для отримання покемонів за типами
 const API_URL = 'https://pokeapi.co/api/v2';
 
+// DOM елементи
 const listRef = document.querySelector('.search__list');
 const loadMoreBtn = document.querySelector('.load-more');
 const dropdownRef = document.querySelector('.search__dropdown');
@@ -14,8 +21,9 @@ const activeFiltersRef = document.querySelector(
   '.search__active-filters'
 );
 const foundCountRef = document.querySelector('.search__text');
+const searchInputRef = document.querySelector('.search__input');
 
-let totalPokemonCount = 0;
+// Змінні
 let searchQuery = '';
 let selectedTypes = [];
 let currentPage = 1;
@@ -24,8 +32,11 @@ let isLoading = false;
 let loadedPokemons = [];
 let filterRequestId = 0;
 
+// Кешування
 const typesCache = new Map();
 const pokemonCache = new Map();
+
+let allPokemonNames = [];
 
 // Відображення покемонів
 function renderImages(array) {
@@ -35,7 +46,6 @@ function renderImages(array) {
       sprites.front_default ||
       '';
 
-    // Типи покемона з оригінальними назвами з API
     const pokemonTypes = types
       .map(
         ({ type }) => `
@@ -46,16 +56,11 @@ function renderImages(array) {
       )
       .join('');
 
-    // ID у форматі #001
     const formattedId = `#${String(id).padStart(3, '0')}`;
 
     return `
       <li class="search__item">
-
-        <a
-          href="./details.html?id=${id}"
-          class="search__link"
-        >
+        <a href="./details.html?id=${id}" class="search__link">
           <img
             src="${image}"
             alt="${name}"
@@ -83,7 +88,6 @@ function renderImages(array) {
             <use href="${symbolDefsUrl}#heart"></use>
           </svg>
         </label>
-
       </li>
     `;
   }).join('');
@@ -91,7 +95,7 @@ function renderImages(array) {
   listRef.innerHTML = images;
 }
 
-// Звичайне завантаження покемонів з пагінацією
+// Завантаження покемонів з пагінацією
 async function loadPokemons() {
   if (isLoading) return;
 
@@ -103,12 +107,14 @@ async function loadPokemons() {
 
     if (!data) return;
 
-    totalPokemonCount = data.count;
-    loadedPokemons = [...loadedPokemons, ...data.results];
+    loadedPokemons = [
+      ...loadedPokemons,
+      ...data.results,
+    ];
 
     currentPage++;
 
-    applyFilters();
+    await applyFilters();
 
     if (!data.next) {
       loadMoreBtn.style.display = 'none';
@@ -127,20 +133,18 @@ async function fetchPokemon(url) {
     return pokemonCache.get(url);
   }
 
-  const response = await fetch(url);
+  const id = url.split('/').filter(Boolean).pop();
 
-  if (!response.ok) {
-    throw new Error('Помилка отримання покемона');
+  const pokemon = await getPokemonById(id);
+
+  if (pokemon) {
+    pokemonCache.set(url, pokemon);
   }
-
-  const pokemon = await response.json();
-
-  pokemonCache.set(url, pokemon);
 
   return pokemon;
 }
 
-// Отримання покемонів за типами з API
+// Отримання покемонів за типами
 async function getPokemonByTypes(types) {
   const typeResults = await Promise.all(
     types.map(async type => {
@@ -163,7 +167,7 @@ async function getPokemonByTypes(types) {
     })
   );
 
-  // Знаходимо спільних покемонів усіх вибраних типів
+  // Знаходимо покемонів, які мають усі вибрані типи
   const filteredPokemons = typeResults[0].filter(pokemon =>
     typeResults.every(typeList =>
       typeList.some(item => item.name === pokemon.name)
@@ -178,6 +182,47 @@ async function getPokemonByTypes(types) {
   );
 }
 
+// Пошук покемонів за частиною імені
+async function searchPokemonByName(name) {
+  try {
+    const query = name.trim().toLowerCase();
+
+    if (!query) return [];
+
+    // Завантажуємо список імен один раз
+    if (allPokemonNames.length === 0) {
+      const response = await fetch(
+        `${API_URL}/pokemon?limit=2000`
+      );
+
+      if (!response.ok) {
+        throw new Error('Помилка отримання списку покемонів');
+      }
+
+      const data = await response.json();
+
+      allPokemonNames = data.results;
+    }
+
+    // Шукаємо збіги за частиною імені
+    const matches = allPokemonNames
+      .filter(pokemon => pokemon.name.includes(query))
+      .slice(0, 20);
+
+    // Отримуємо повну інформацію через API-функцію
+    return await Promise.all(
+      matches.map(pokemon =>
+        getPokemonByName(pokemon.name)
+      )
+    );
+
+  } catch (error) {
+    console.error('Помилка пошуку покемона:', error);
+    return [];
+  }
+}
+
+// Застосування фільтрів
 async function applyFilters() {
   const requestId = ++filterRequestId;
 
@@ -194,14 +239,16 @@ async function applyFilters() {
       pokemons = loadedPokemons;
     }
 
+    // Перевірка актуальності запиту
     if (requestId !== filterRequestId) return;
 
-    // Якщо вибрані типи — залишаємо покемонів,
-    // які мають усі вибрані типи
+    // Поєднання пошуку та фільтрації за типами
     if (searchQuery && selectedTypes.length > 0) {
       pokemons = pokemons.filter(pokemon =>
         selectedTypes.every(type =>
-          pokemon.types.some(item => item.type.name === type)
+          pokemon.types.some(
+            item => item.type.name === type
+          )
         )
       );
     }
@@ -211,64 +258,32 @@ async function applyFilters() {
     foundCountRef.textContent = `Знайдено: ${pokemons.length}`;
 
     loadMoreBtn.style.display =
-      searchQuery || selectedTypes.length > 0 ? 'none' : '';
+      searchQuery || selectedTypes.length > 0
+        ? 'none'
+        : '';
 
   } catch (error) {
     console.error('Помилка фільтрації:', error);
   }
 }
-// Кеш усіх імен покемонів
-let allPokemonNames = [];
-let nameSearchRequestId = 0;
 
-// Пошук покемонів за частиною імені
-async function searchPokemonByName(name) {
-  try {
-    const query = name.trim().toLowerCase();
-
-    if (!query) return [];
-
-    // Завантажуємо список імен лише один раз
-    if (allPokemonNames.length === 0) {
-      const response = await fetch(`${API_URL}/pokemon?limit=2000`);
-
-      if (!response.ok) {
-        throw new Error('Помилка отримання списку покемонів');
-      }
-
-      const data = await response.json();
-      allPokemonNames = data.results;
-    }
-
-    // Шукаємо збіги після кожної введеної букви
-    const matches = allPokemonNames
-      .filter(pokemon => pokemon.name.includes(query))
-      .slice(0, 20);
-
-    // Отримуємо повну інформацію для карток
-    return await Promise.all(
-      matches.map(pokemon => fetchPokemon(pokemon.url))
-    );
-
-  } catch (error) {
-    console.error('Помилка пошуку покемона:', error);
-    return [];
-  }
-}
-
-const searchInputRef = document.querySelector('.search__input');
-
+// Пошук при введенні тексту
 searchInputRef.addEventListener('input', async event => {
   searchQuery = event.target.value.trim().toLowerCase();
 
   await applyFilters();
 });
+
 // Відкриття меню вибору типу
 selectButtonRef.addEventListener('click', () => {
   const isOpen =
     selectButtonRef.getAttribute('aria-expanded') === 'true';
 
-  selectButtonRef.setAttribute('aria-expanded', String(!isOpen));
+  selectButtonRef.setAttribute(
+    'aria-expanded',
+    String(!isOpen)
+  );
+
   optionsRef.hidden = isOpen;
 });
 
@@ -283,7 +298,9 @@ optionsRef.addEventListener('click', async event => {
   if (type === 'all') {
     selectedTypes = [];
   } else if (selectedTypes.includes(type)) {
-    selectedTypes = selectedTypes.filter(item => item !== type);
+    selectedTypes = selectedTypes.filter(
+      item => item !== type
+    );
   } else {
     selectedTypes.push(type);
   }
@@ -306,7 +323,11 @@ function updateDropdown() {
         : selectedTypes.includes(type);
 
     option.classList.toggle('is-selected', isSelected);
-    option.setAttribute('aria-pressed', String(isSelected));
+
+    option.setAttribute(
+      'aria-pressed',
+      String(isSelected)
+    );
   });
 
   selectLabelRef.textContent =
@@ -315,30 +336,31 @@ function updateDropdown() {
       : `Обрано типів: ${selectedTypes.length}`;
 }
 
-// Закриття при кліку поза меню
+// Закриття меню при кліку поза ним
 document.addEventListener('click', event => {
   if (!dropdownRef.contains(event.target)) {
     optionsRef.hidden = true;
-    selectButtonRef.setAttribute('aria-expanded', 'false');
+
+    selectButtonRef.setAttribute(
+      'aria-expanded',
+      'false'
+    );
   }
 });
 
-// Закриття клавішею Escape
+// Закриття меню клавішею Escape
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     optionsRef.hidden = true;
-    selectButtonRef.setAttribute('aria-expanded', 'false');
+
+    selectButtonRef.setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
     selectButtonRef.focus();
   }
 });
-
-updateDropdown();
-
-// Кнопка завантаження наступної сторінки
-loadMoreBtn.addEventListener('click', loadPokemons);
-
-// Перше завантаження
-loadPokemons();
 
 // Відображення активних фільтрів
 function renderActiveFilters() {
@@ -360,7 +382,9 @@ function renderActiveFilters() {
 
 // Видалення активного фільтра
 activeFiltersRef.addEventListener('click', async event => {
-  const button = event.target.closest('.search__active-filter');
+  const button = event.target.closest(
+    '.search__active-filter'
+  );
 
   if (!button) return;
 
@@ -374,3 +398,12 @@ activeFiltersRef.addEventListener('click', async event => {
 
   await applyFilters();
 });
+
+// Початкове налаштування
+updateDropdown();
+
+// Кнопка завантаження наступної сторінки
+loadMoreBtn.addEventListener('click', loadPokemons);
+
+// Перше завантаження
+loadPokemons();

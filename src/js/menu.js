@@ -107,7 +107,7 @@ async function getRandomPokemon() {
 
     randomBtn.innerHTML = `
       <svg class="menu__icon">
-    <use href="./img/symbol-defs.svg#dice-five"></use>
+    <use href="${symbolDefsUrl}#dice-five"></use>
   </svg>
   Дослідити ще
 
