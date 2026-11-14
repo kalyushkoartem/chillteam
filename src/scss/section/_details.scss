@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +6,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
   background-color: #f4f7fa;
   color: #1e293b;
   line-height: 1.5;
@@ -17,194 +19,199 @@ body {
   margin: 0 auto;
 }
 
-/* Посилання назад */
-.details__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 20px;
+// Сторінка деталей
+.details {
+  // Посилання назад
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 20px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  // Головна біла картка
+  &__box {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    column-gap: 40px;
+    align-items: start;
+  }
+
+  // Ліва колонка
+  &__imgbox {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    background-color: #fef9c3;
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 460px;
+    position: relative;
+
+    .details__pokemonid {
+      font-weight: 700;
+      font-size: 16px;
+      color: #854d0e;
+      align-self: flex-start;
+    }
+  }
+
+  &__img {
+    width: 240px;
+    height: 240px;
+    object-fit: contain;
+    margin: auto;
+    filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.12));
+  }
+
+  &__genus {
+    text-align: center;
+    color: #854d0e;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  // Права колонка
+  &__infobox {
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 16px;
+    position: relative;
+    margin-bottom: 24px;
+
+    .details__pokemonid {
+      grid-column: 1 / 3;
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+  }
+
+  &__name {
+    grid-column: 1 / 3;
+    font-size: 36px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.1;
+    text-transform: capitalize;
+  }
+
+  // Кнопка обраного
+  &__fav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #fee2e2;
+    background-color: #fff5f5;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      transform 0.15s ease,
+      background-color 0.15s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: #fee2e2;
+    }
+
+    &.active {
+      background-color: #ef4444;
+      color: #ffffff;
+    }
+  }
+
+  // Типи покемонів
+  &__filtr {
+    grid-column: 1 / 4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 4px 0;
+  }
+
+  &__description {
+    grid-column: 1 / 4;
+    font-size: 14px;
+    color: #475569;
+    margin-bottom: 8px;
+  }
+
+  // Параметри
+  &__height,
+  &__weight,
+  &__capability {
+    background-color: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+
+  &__text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  // Характеристики
+  &__stats {
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  &__total {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+  }
 }
 
-.details__link:hover {
-  text-decoration: underline;
-}
-
-.details__icon {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-
-/* Головна біла картка */
-.details__box {
-  background-color: #ffffff;
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  column-gap: 40px;
-  align-items: start;
-}
-
-/* Ліва колонка: зображення покемона */
-.details__imgbox {
-  grid-column: 1 / 2;
-  grid-row: 1 / 5;
-  background-color: #fef9c3;
-  border-radius: 16px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 460px;
-  position: relative;
-}
-
-.details__imgbox .details__pokemonid {
-  font-weight: 700;
-  font-size: 16px;
-  color: #854d0e;
-  align-self: flex-start;
-}
-
-.details__img {
-  width: 240px;
-  height: 240px;
-  object-fit: contain;
-  margin: auto;
-  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.12));
-}
-
-.details__genus {
-  text-align: center;
-  color: #854d0e;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Права колонка: основна інформація */
-.details__infobox {
-  grid-column: 2 / 3;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px 16px;
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.details__infobox .details__pokemonid {
-  grid-column: 1 / 3;
-  font-size: 13px;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.details__name {
-  grid-column: 1 / 3;
-  font-size: 36px;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.1;
-  text-transform: capitalize;
-}
-
-/* Кнопка сердечка зверху справа */
-.details__fav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid #fee2e2;
-  background-color: #fff5f5;
-  color: #ef4444;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-.details__fav:hover {
-  transform: scale(1.05);
-  background-color: #fee2e2;
-}
-
-.details__fav.active {
-  background-color: #ef4444;
-  color: #ffffff;
-}
-
-/* Бейджі типів */
-.details__filtr {
-  grid-column: 1 / 4;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 4px 0;
-}
-
-.details__description {
-  grid-column: 1 / 4;
-  font-size: 14px;
-  color: #475569;
-  margin-bottom: 8px;
-}
-
-/* Картки параметрів (Зріст, Вага, Здібність) */
-.details__height,
-.details__weight,
-.details__capability {
-  background-color: #f8fafc;
-  border: 1px solid #f1f5f9;
-  border-radius: 12px;
-  padding: 12px 16px;
-}
-
-.details__label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #64748b;
-  margin-bottom: 4px;
-}
-
-.details__text {
-  font-size: 15px;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-/* Заголовок характеристик */
-.details__stats {
-  grid-column: 2 / 3;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-
-.details__title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.details__total {
-  font-size: 13px;
-  font-weight: 600;
-  color: #64748b;
-}
-
-/* Список прогрес-барів */
+// Список характеристик
 .stats-list {
   grid-column: 2 / 3;
   display: flex;
@@ -231,29 +238,33 @@ body {
   text-align: right;
 }
 
-.progress-container {
-  width: 100%;
-  height: 6px;
-  background-color: #e2e8f0;
-  border-radius: 999px;
-  overflow: hidden;
+.progress {
+  &-container {
+    width: 100%;
+    height: 6px;
+    background-color: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  &-bar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
 }
 
-.progress-bar {
-  height: 100%;
-  border-radius: 999px;
-  transition: width 0.4s ease;
+.bg {
+  &-yellow {
+    background-color: #facc15;
+  }
+
+  &-blue {
+    background-color: #2563eb;
+  }
 }
 
-.bg-yellow {
-  background-color: #facc15;
-}
-
-.bg-blue {
-  background-color: #2563eb;
-}
-
-/* Синя кнопка "Додати до обраного" */
+// Кнопка додавання до обраного
 .favorite-action-btn {
   grid-column: 2 / 3;
   justify-self: start;
@@ -269,94 +280,99 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #1d4ed8;
+  }
+
+  &.is-fav {
+    background-color: #ef4444;
+  }
 }
 
-.favorite-action-btn:hover {
-  background-color: #1d4ed8;
+// Блок еволюції
+.evolution {
+  &-wrapper {
+    grid-column: 1 / 3;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  &-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+  }
+
+  &-chain {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 }
 
-.favorite-action-btn.is-fav {
-  background-color: #ef4444;
-}
+// Покемони в еволюції
+.evo {
+  &-pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
 
-/* Блок еволюції (на всю ширину картки знизу) */
-.evolution-wrapper {
-  grid-column: 1 / 3;
-  margin-top: 40px;
-  padding-top: 32px;
-  border-top: 1px solid #f1f5f9;
-}
+    &:hover .evo-img-container {
+      transform: translateY(-4px);
+    }
+  }
 
-.evolution-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 24px;
-}
+  &-img-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
 
-.evolution-chain {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 16px;
-}
+    &.bg-blue {
+      background-color: #f1f5f9;
+    }
 
-.evo-pokemon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-}
+    &.bg-yellow {
+      background-color: #fef9c3;
+      border: 2px solid #fde047;
+    }
+  }
 
-.evo-img-container {
-  width: 120px;
-  height: 120px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-  transition: transform 0.2s ease;
-}
+  &-img {
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+  }
 
-.evo-pokemon:hover .evo-img-container {
-  transform: translateY(-4px);
-}
+  &-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+  }
 
-.evo-img-container.bg-blue {
-  background-color: #f1f5f9;
-}
+  &-id {
+    font-size: 12px;
+    color: #94a3b8;
+  }
 
-.evo-img-container.bg-yellow {
-  background-color: #fef9c3;
-  border: 2px solid #fde047;
-}
-
-.evo-img {
-  width: 84px;
-  height: 84px;
-  object-fit: contain;
-}
-
-.evo-name {
-  font-size: 14px;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.evo-id {
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-.evo-arrow-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #94a3b8;
-  font-size: 12px;
+  &-arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 12px;
+  }
 }
 
 .arrow-graphic {
@@ -364,7 +380,7 @@ body {
   margin-bottom: 4px;
 }
 
-/* Футер навігації (Попередній / Наступний) */
+// Нижня навігація
 .pokedex-footer {
   grid-column: 1 / 3;
   display: flex;
@@ -380,32 +396,37 @@ body {
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
+
+  &:first-child {
+    color: #94a3b8;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.nav-link:first-child {
-  color: #94a3b8;
-}
-
-.nav-link:hover {
-  text-decoration: underline;
-}
-
-/* Адаптивність для планшетів та телефонів */
+// Адаптивність
 @media (max-width: 860px) {
-  .details__box {
-    grid-template-columns: 1fr;
-    padding: 20px;
+  .details {
+    &__box {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+
+    &__imgbox {
+      grid-column: 1 / 2;
+      grid-row: auto;
+      min-height: 320px;
+      margin-bottom: 24px;
+    }
+
+    &__infobox,
+    &__stats {
+      grid-column: 1 / 2;
+    }
   }
 
-  .details__imgbox {
-    grid-column: 1 / 2;
-    grid-row: auto;
-    min-height: 320px;
-    margin-bottom: 24px;
-  }
-
-  .details__infobox,
-  .details__stats,
   .stats-list,
   .favorite-action-btn,
   .evolution-wrapper,
@@ -413,9 +434,3 @@ body {
     grid-column: 1 / 2;
   }
 }
-
-
-
-
-
- 
