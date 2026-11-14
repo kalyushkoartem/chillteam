@@ -71,23 +71,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-}
-
-.container {
-  max-width: 1326px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 .header {
   width: 100%;
   height: 60px;
@@ -107,8 +90,9 @@ body {
   gap: 10px;
   text-decoration: none;
   color: #333d4d;
-  font-size: 18px;
+  font-size: 23px;
   font-weight: 700;
+  margin-right: 550px;
 }
 .header__logo img {
   display: none;
@@ -123,6 +107,7 @@ body {
   gap: 32px;
   list-style: none;
   height: 100%;
+  margin-right: 60px;
 }
 .header__item {
   height: 100%;
@@ -144,7 +129,7 @@ body {
 .header__item a:hover, .header__item:not(:has(a)):hover {
   color: #2b6cb0;
 }
-.header__item::after {
+.header__item a::after, .header__item:not(:has(a))::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -156,13 +141,13 @@ body {
   transform: translateX(-50%);
   border-radius: 2px;
 }
-.header__item:hover::after {
+.header__item a:hover::after, .header__item:not(:has(a)):hover::after {
   width: 100%;
 }
-.header__item.current a {
+.header__item__item.current a {
   color: #2b6cb0;
 }
-.header__item.current::after {
+.header__item__item.current::after {
   width: 100%;
 }
 .header__btn {
@@ -182,6 +167,12 @@ body {
   background-color: #78b5ff;
   color: #fdfeff;
   border-color: #4693e6;
+}
+.header__svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
 }
 
 .hero {
@@ -967,20 +958,6 @@ body {
 .search__name {
   margin: 0;
   text-transform: capitalize;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f4f7fa;
-  color: #1e293b;
-  line-height: 1.5;
-  padding: 24px 16px;
 }
 
 .container {
