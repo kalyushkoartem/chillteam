@@ -1,34 +1,40 @@
-import{g as T}from"./assets/details-a4e1ceed.js";const A=document.querySelector(".open-modal"),r=document.querySelector(".modal"),I=document.querySelector(".modal__close"),m=document.querySelector(".pokemon__random"),S=document.querySelector(".pokemonimg"),j=document.querySelector(".pokemon__name"),H=document.querySelector(".pokemon__number"),w=document.querySelector(".pokemon__types"),B=document.querySelector(".pokemon__height"),F=document.querySelector(".pokemon__weight"),L=document.querySelector(".pokemon__stats");A.addEventListener("click",()=>{r.classList.add("active"),E()});I.addEventListener("click",()=>{r.classList.remove("active")});r.addEventListener("click",e=>{e.target===r&&r.classList.remove("active")});document.addEventListener("keydown",e=>{e.key==="Escape"&&r.classList.remove("active")});async function E(){try{m.textContent="Завантаження...";const e=Math.floor(Math.random()*1025)+1,n=await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`);if(!n.ok)throw new Error("Помилка завантаження покемона");const t=await n.json();S.src=t.sprites.other["official-artwork"].front_default||t.sprites.front_default,S.alt=t.name,j.textContent=t.name,H.textContent=`#${String(t.id).padStart(3,"0")}`,w.innerHTML="",t.types.forEach(o=>{const a=document.createElement("span");a.classList.add("pokemon__type"),a.textContent=o.type.name,w.appendChild(a)}),B.textContent=`${t.height/10} м`,F.textContent=`${t.weight/10} кг`,L.innerHTML="",t.stats.forEach(o=>{const a=document.createElement("div");a.classList.add("pokemon__stat"),a.innerHTML=`
-        <span>${o.stat.name}</span>
+import{g as j}from"./assets/details-a4e1ceed.js";const H="/chillteam/assets/symbol-defs-9e525b8f.svg",B=document.querySelector(".open-modal"),c=document.querySelector(".modal"),N=document.querySelector(".modal__close"),u=document.querySelector(".pokemon__random"),L=document.querySelector(".pokemonimg"),F=document.querySelector(".pokemon__name"),D=document.querySelector(".pokemon__number"),$=document.querySelector(".pokemon__types"),U=document.querySelector(".pokemon__height"),z=document.querySelector(".pokemon__weight"),q=document.querySelector(".pokemon__stats");B.addEventListener("click",()=>{c.classList.add("active"),C()});N.addEventListener("click",()=>{c.classList.remove("active")});c.addEventListener("click",e=>{e.target===c&&c.classList.remove("active")});document.addEventListener("keydown",e=>{e.key==="Escape"&&c.classList.remove("active")});async function C(){try{u.textContent="Завантаження...";const e=Math.floor(Math.random()*1025)+1,n=await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`);if(!n.ok)throw new Error("Помилка завантаження покемона");const o=await n.json();L.src=o.sprites.other["official-artwork"].front_default||o.sprites.front_default,L.alt=o.name,F.textContent=o.name,D.textContent=`#${String(o.id).padStart(3,"0")}`,$.innerHTML="",o.types.forEach(t=>{const s=document.createElement("span");s.classList.add("pokemon__type",`type-badge--${t.type.name}`),s.textContent=t.type.name,$.appendChild(s)}),U.textContent=`${o.height/10} м`,z.textContent=`${o.weight/10} кг`,q.innerHTML="",o.stats.forEach(t=>{const s=document.createElement("div");s.classList.add("pokemon__stat"),s.innerHTML=`
+        <span>${t.stat.name}</span>
 
         <div class="pokemon__bar">
-          <div style="width: ${Math.min(o.base_stat/255*100,100)}%"></div>
+          <div style="width: ${Math.min(t.base_stat/255*100,100)}%"></div>
         </div>
 
-        <span>${o.base_stat}</span>
-      `,L.appendChild(a)}),m.textContent="🎲 Дослідити ще"}catch(e){console.error(e),m.textContent="Помилка завантаження. Спробувати ще раз"}}m.addEventListener("click",E);const D="/chillteam/assets/symbol-defs-9e525b8f.svg",N="https://pokeapi.co/api/v2",U=document.querySelector(".search__list"),l=document.querySelector(".load-more"),z=document.querySelector(".search__dropdown"),i=document.querySelector(".search__select"),O=document.querySelector(".search__select-label"),d=document.querySelector(".search__options"),x=document.querySelector(".search__active-filters"),W=document.querySelector(".search__text");let C=0,s=[],$=1;const G=20;let p=!1,_=[],q=0;const f=new Map,h=new Map;function J(e){const n=e.map(({id:t,name:o,types:a,sprites:c})=>{var g,v;const u=((v=(g=c.other)==null?void 0:g["official-artwork"])==null?void 0:v.front_default)||c.front_default||"",P=a.map(({type:b})=>`
-          <span class="type-badge type-badge--${b.name}">
-            ${b.name}
+        <span>${t.base_stat}</span>
+      `,q.appendChild(s)}),u.innerHTML=`
+      <svg class="menu__icon">
+    <use href="./img/symbol-defs.svg#dice-five"></use>
+  </svg>
+  Дослідити ще
+
+`}catch(e){console.error(e),u.textContent="Помилка завантаження. Спробувати ще раз"}}u.addEventListener("click",C);const P="https://pokeapi.co/api/v2",O=document.querySelector(".search__list"),d=document.querySelector(".load-more"),Q=document.querySelector(".search__dropdown"),i=document.querySelector(".search__select"),W=document.querySelector(".search__select-label"),m=document.querySelector(".search__options"),M=document.querySelector(".search__active-filters"),G=document.querySelector(".search__text");let J=0,l="",a=[],E=1;const K=20;let h=!1,g=[],x=0;const y=new Map,_=new Map;function V(e){const n=e.map(({id:o,name:t,types:s,sprites:r})=>{var w,b;const f=((b=(w=r.other)==null?void 0:w["official-artwork"])==null?void 0:b.front_default)||r.front_default||"",A=s.map(({type:S})=>`
+          <span class="type-badge type-badge--${S.name}">
+            ${S.name}
           </span>
-        `).join(""),R=`#${String(t).padStart(3,"0")}`;return`
+        `).join(""),I=`#${String(o).padStart(3,"0")}`;return`
       <li class="search__item">
 
         <a
-          href="./details.html?id=${t}"
+          href="./details.html?id=${o}"
           class="search__link"
         >
           <img
-            src="${u}"
-            alt="${o}"
+            src="${f}"
+            alt="${t}"
             loading="lazy"
           >
 
-          <p class="search__id">${R}</p>
+          <p class="search__id">${I}</p>
 
-          <h3 class="search__name">${o}</h3>
+          <h3 class="search__name">${t}</h3>
 
           <div class="search__tag">
-            ${P}
+            ${A}
           </div>
         </a>
 
@@ -36,17 +42,17 @@ import{g as T}from"./assets/details-a4e1ceed.js";const A=document.querySelector(
           <input
             type="checkbox"
             class="search__checkbox"
-            data-id="${t}"
-            aria-label="Додати ${o} до обраного"
+            data-id="${o}"
+            aria-label="Додати ${t} до обраного"
           >
 
           <svg class="search__icon search__icon--fav">
-            <use href="${D}#heart"></use>
+            <use href="${H}#heart"></use>
           </svg>
         </label>
 
       </li>
-    `}).join("");U.innerHTML=n}async function M(){if(!p){p=!0,l.disabled=!0;try{const e=await T(G,$);if(!e)return;C=e.count,_=[..._,...e.results],$++,y(),e.next||(l.style.display="none")}catch(e){console.error("Помилка завантаження:",e)}finally{p=!1,l.disabled=!1}}}async function K(e){if(h.has(e))return h.get(e);const n=await fetch(e);if(!n.ok)throw new Error("Помилка отримання покемона");const t=await n.json();return h.set(e,t),t}async function Q(e){const n=await Promise.all(e.map(async o=>{if(!f.has(o)){const a=await fetch(`${N}/type/${o}`);if(!a.ok)throw new Error(`Помилка отримання типу: ${o}`);const c=await a.json();f.set(o,c.pokemon.map(u=>u.pokemon))}return f.get(o)})),t=n[0].filter(o=>n.every(a=>a.some(c=>c.name===o.name)));return Promise.all(t.map(o=>K(o.url)))}async function y(){const e=++q;V();try{let n;if(s.length>0?n=await Q(s):n=_,e!==q)return;J(n);const t=s.length===0?C:n.length;W.textContent=`Знайдено: ${t}`,l.style.display=s.length>0?"none":""}catch(n){console.error("Помилка фільтрації:",n)}}i.addEventListener("click",()=>{const e=i.getAttribute("aria-expanded")==="true";i.setAttribute("aria-expanded",String(!e)),d.hidden=e});d.addEventListener("click",async e=>{const n=e.target.closest(".search__option");if(!n)return;const t=n.dataset.type;t==="all"?s=[]:s.includes(t)?s=s.filter(o=>o!==t):s.push(t),k(),await y()});function k(){d.querySelectorAll(".search__option").forEach(n=>{const t=n.dataset.type,o=t==="all"?s.length===0:s.includes(t);n.classList.toggle("is-selected",o),n.setAttribute("aria-pressed",String(o))}),O.textContent=s.length===0?"Усі типи":`Обрано типів: ${s.length}`}document.addEventListener("click",e=>{z.contains(e.target)||(d.hidden=!0,i.setAttribute("aria-expanded","false"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(d.hidden=!0,i.setAttribute("aria-expanded","false"),i.focus())});k();l.addEventListener("click",M);M();function V(){x.innerHTML=s.map(e=>`
+    `}).join("");O.innerHTML=n}async function R(){if(!h){h=!0,d.disabled=!0;try{const e=await j(K,E);if(!e)return;J=e.count,g=[...g,...e.results],E++,p(),e.next||(d.style.display="none")}catch(e){console.error("Помилка завантаження:",e)}finally{h=!1,d.disabled=!1}}}async function T(e){if(_.has(e))return _.get(e);const n=await fetch(e);if(!n.ok)throw new Error("Помилка отримання покемона");const o=await n.json();return _.set(e,o),o}async function X(e){const n=await Promise.all(e.map(async t=>{if(!y.has(t)){const s=await fetch(`${P}/type/${t}`);if(!s.ok)throw new Error(`Помилка отримання типу: ${t}`);const r=await s.json();y.set(t,r.pokemon.map(f=>f.pokemon))}return y.get(t)})),o=n[0].filter(t=>n.every(s=>s.some(r=>r.name===t.name)));return Promise.all(o.map(t=>T(t.url)))}async function p(){const e=++x;ee();try{let n;if(l?n=await Y(l):a.length>0?n=await X(a):n=g,e!==x)return;l&&a.length>0&&(n=n.filter(o=>a.every(t=>o.types.some(s=>s.type.name===t)))),V(n),G.textContent=`Знайдено: ${n.length}`,d.style.display=l||a.length>0?"none":""}catch(n){console.error("Помилка фільтрації:",n)}}let k=[];async function Y(e){try{const n=e.trim().toLowerCase();if(!n)return[];if(k.length===0){const t=await fetch(`${P}/pokemon?limit=2000`);if(!t.ok)throw new Error("Помилка отримання списку покемонів");k=(await t.json()).results}const o=k.filter(t=>t.name.includes(n)).slice(0,20);return await Promise.all(o.map(t=>T(t.url)))}catch(n){return console.error("Помилка пошуку покемона:",n),[]}}const Z=document.querySelector(".search__input");Z.addEventListener("input",async e=>{l=e.target.value.trim().toLowerCase(),await p()});i.addEventListener("click",()=>{const e=i.getAttribute("aria-expanded")==="true";i.setAttribute("aria-expanded",String(!e)),m.hidden=e});m.addEventListener("click",async e=>{const n=e.target.closest(".search__option");if(!n)return;const o=n.dataset.type;o==="all"?a=[]:a.includes(o)?a=a.filter(t=>t!==o):a.push(o),v(),await p()});function v(){m.querySelectorAll(".search__option").forEach(n=>{const o=n.dataset.type,t=o==="all"?a.length===0:a.includes(o);n.classList.toggle("is-selected",t),n.setAttribute("aria-pressed",String(t))}),W.textContent=a.length===0?"Усі типи":`Обрано типів: ${a.length}`}document.addEventListener("click",e=>{Q.contains(e.target)||(m.hidden=!0,i.setAttribute("aria-expanded","false"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(m.hidden=!0,i.setAttribute("aria-expanded","false"),i.focus())});v();d.addEventListener("click",R);R();function ee(){M.innerHTML=a.map(e=>`
         <button
           class="search__active-filter"
           type="button"
@@ -55,5 +61,5 @@ import{g as T}from"./assets/details-a4e1ceed.js";const A=document.querySelector(
           ${e}
           <span>&times;</span>
         </button>
-      `).join("")}x.addEventListener("click",async e=>{const n=e.target.closest(".search__active-filter");if(!n)return;const t=n.dataset.type;s=s.filter(o=>o!==t),k(),await y()});document.querySelector(".not-found");document.querySelector(".not-found__back-btn");document.querySelector(".not-found__clear-btn");
+      `).join("")}M.addEventListener("click",async e=>{const n=e.target.closest(".search__active-filter");if(!n)return;const o=n.dataset.type;a=a.filter(t=>t!==o),v(),await p()});document.querySelector(".not-found");document.querySelector(".not-found__back-btn");document.querySelector(".not-found__clear-btn");
 //# sourceMappingURL=commonHelpers3.js.map
