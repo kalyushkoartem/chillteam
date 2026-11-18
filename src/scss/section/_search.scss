@@ -6,8 +6,9 @@
 // ======================================
 
 .search {
-  padding: 40px 0;
-
+    position: relative;
+    z-index: 2;
+    margin-top: -40px;
   // Основний контейнер
   &__box {
     display: flex;
@@ -366,9 +367,11 @@
   // RANDOM BUTTON
   // ======================================
 
-  &__btn {    display: inline-flex;
+  &__btn {    
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 3px;
 
     min-width: 190px;
     min-height: 48px;
