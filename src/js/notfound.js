@@ -1,7 +1,7 @@
 
-const notFound = document.querySelector(".not-found");
-const backBtn = document.querySelector(".not-found__back-btn");
-const clearBtn = document.querySelector(".not-found__clear-btn");
+const notFound = document.querySelector(".notfound[hidden]");
+const backBtn = document.querySelector(".notfound__backbtn");
+const clearBtn = document.querySelector(".notfound__clearbtn");
 
 // Показати повідомлення
 export function showNotFound() {

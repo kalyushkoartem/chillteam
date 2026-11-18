@@ -1,5 +1,5 @@
-
 import symbolDefsUrl from '../img/symbol-defs.svg?url';
+import { showNotFound, hideNotFound, initNotFound } from './notfound';
 
 import {
   getPokemons,
@@ -27,9 +27,7 @@ const dropdownRef = document.querySelector('.search__dropdown');
 const selectButtonRef = document.querySelector('.search__select');
 const selectLabelRef = document.querySelector('.search__select-label');
 const optionsRef = document.querySelector('.search__options');
-const activeFiltersRef = document.querySelector(
-  '.search__active-filters'
-);
+const activeFiltersRef = document.querySelector('.search__active-filters');
 const foundCountRef = document.querySelector('.search__text');
 const searchInputRef = document.querySelector('.search__input');
 
@@ -147,10 +145,7 @@ async function loadPokemons() {
 
     if (!data) return;
 
-    loadedPokemons = [
-      ...loadedPokemons,
-      ...data.results,
-    ];
+    loadedPokemons = [...loadedPokemons, ...data.results];
 
     currentPage++;
 
@@ -216,9 +211,7 @@ async function getPokemonByTypes(types) {
 
   // Отримуємо детальну інформацію
   return Promise.all(
-    filteredPokemons.map(pokemon =>
-      fetchPokemon(pokemon.url)
-    )
+    filteredPokemons.map(pokemon => fetchPokemon(pokemon.url))
   );
 }
 
@@ -231,9 +224,7 @@ async function searchPokemonByName(name) {
 
     // Завантажуємо список імен один раз
     if (allPokemonNames.length === 0) {
-      const response = await fetch(
-        `${API_URL}/pokemon?limit=2000`
-      );
+      const response = await fetch(`${API_URL}/pokemon?limit=2000`);
 
       if (!response.ok) {
         throw new Error('Помилка отримання списку покемонів');
@@ -251,11 +242,8 @@ async function searchPokemonByName(name) {
 
     // Отримуємо повну інформацію через API-функцію
     return await Promise.all(
-      matches.map(pokemon =>
-        getPokemonByName(pokemon.name)
-      )
+      matches.map(pokemon => getPokemonByName(pokemon.name))
     );
-
   } catch (error) {
     console.error('Помилка пошуку покемона:', error);
     return [];
@@ -286,22 +274,22 @@ async function applyFilters() {
     if (searchQuery && selectedTypes.length > 0) {
       pokemons = pokemons.filter(pokemon =>
         selectedTypes.every(type =>
-          pokemon.types.some(
-            item => item.type.name === type
-          )
+          pokemon.types.some(item => item.type.name === type)
         )
       );
     }
 
     renderImages(pokemons);
+    if (pokemons.length === 0) {
+      showNotFound();
+    } else {
+      hideNotFound();
+    }
 
     foundCountRef.textContent = `Знайдено: ${pokemons.length}`;
 
     loadMoreBtn.style.display =
-      searchQuery || selectedTypes.length > 0
-        ? 'none'
-        : '';
-
+      searchQuery || selectedTypes.length > 0 ? 'none' : '';
   } catch (error) {
     console.error('Помилка фільтрації:', error);
   }
@@ -316,13 +304,9 @@ searchInputRef.addEventListener('input', async event => {
 
 // Відкриття меню вибору типу
 selectButtonRef.addEventListener('click', () => {
-  const isOpen =
-    selectButtonRef.getAttribute('aria-expanded') === 'true';
+  const isOpen = selectButtonRef.getAttribute('aria-expanded') === 'true';
 
-  selectButtonRef.setAttribute(
-    'aria-expanded',
-    String(!isOpen)
-  );
+  selectButtonRef.setAttribute('aria-expanded', String(!isOpen));
 
   optionsRef.hidden = isOpen;
 });
@@ -338,9 +322,7 @@ optionsRef.addEventListener('click', async event => {
   if (type === 'all') {
     selectedTypes = [];
   } else if (selectedTypes.includes(type)) {
-    selectedTypes = selectedTypes.filter(
-      item => item !== type
-    );
+    selectedTypes = selectedTypes.filter(item => item !== type);
   } else {
     selectedTypes.push(type);
   }
@@ -364,10 +346,7 @@ function updateDropdown() {
 
     option.classList.toggle('is-selected', isSelected);
 
-    option.setAttribute(
-      'aria-pressed',
-      String(isSelected)
-    );
+    option.setAttribute('aria-pressed', String(isSelected));
   });
 
   selectLabelRef.textContent =
@@ -381,10 +360,7 @@ document.addEventListener('click', event => {
   if (!dropdownRef.contains(event.target)) {
     optionsRef.hidden = true;
 
-    selectButtonRef.setAttribute(
-      'aria-expanded',
-      'false'
-    );
+    selectButtonRef.setAttribute('aria-expanded', 'false');
   }
 });
 
@@ -393,10 +369,7 @@ document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     optionsRef.hidden = true;
 
-    selectButtonRef.setAttribute(
-      'aria-expanded',
-      'false'
-    );
+    selectButtonRef.setAttribute('aria-expanded', 'false');
 
     selectButtonRef.focus();
   }
@@ -422,17 +395,13 @@ function renderActiveFilters() {
 
 // Видалення активного фільтра
 activeFiltersRef.addEventListener('click', async event => {
-  const button = event.target.closest(
-    '.search__active-filter'
-  );
+  const button = event.target.closest('.search__active-filter');
 
   if (!button) return;
 
   const type = button.dataset.type;
 
-  selectedTypes = selectedTypes.filter(
-    selectedType => selectedType !== type
-  );
+  selectedTypes = selectedTypes.filter(selectedType => selectedType !== type);
 
   updateDropdown();
 
@@ -444,6 +413,15 @@ updateDropdown();
 
 // Кнопка завантаження наступної сторінки
 loadMoreBtn.addEventListener('click', loadPokemons);
+
+initNotFound(() => {
+  searchQuery = '';
+  selectedTypes = [];
+  searchInputRef.value = '';
+
+  updateDropdown();
+  applyFilters();
+});
 
 // Перше завантаження
 loadPokemons();
