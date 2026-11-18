@@ -92,7 +92,7 @@ input[type=number]::-webkit-outer-spin-button {
   color: #333d4d;
   font-size: 23px;
   font-weight: 700;
-  margin-right: 550px;
+  margin-right: 770px;
 }
 .header__logo img {
   display: none;
@@ -960,11 +960,6 @@ input[type=number]::-webkit-outer-spin-button {
   text-transform: capitalize;
 }
 
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
 .details__link {
   display: inline-flex;
   align-items: center;
@@ -1383,7 +1378,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
 }
 
 .modal {
@@ -1676,8 +1670,8 @@ body {
   margin-bottom: 5px;
   position: relative;
   padding-left: 30px;
+  margin-top: 20px;
 }
-
 .fav__title::before {
   content: "❤️";
   position: absolute;
@@ -1685,14 +1679,12 @@ body {
   top: -2px;
   font-size: 20px;
 }
-
 .fav_text {
   font-size: 12px;
   color: #71839f;
   margin-left: 30px;
   margin-bottom: 18px;
 }
-
 .fav__info {
   display: flex;
   align-items: center;
@@ -1703,14 +1695,12 @@ body {
   padding: 8px 10px;
   margin-top: 18px;
 }
-
 .fav__count {
   font-size: 12px;
   color: #45658f;
   position: relative;
   padding-left: 25px;
 }
-
 .fav__count::before {
   content: "!";
   position: absolute;
@@ -1727,7 +1717,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .fav__btn {
   background-color: #ffffff;
   border: 1px solid #b8d7ff;
@@ -1739,7 +1728,6 @@ body {
   cursor: pointer;
   transition: 0.2s;
 }
-
 .fav__btn:hover {
   background-color: #1670f5;
   color: white;

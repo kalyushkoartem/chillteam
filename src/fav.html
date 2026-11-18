@@ -4,45 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<link rel="stylesheet" href="./scss/main.scss">
+    <link rel="stylesheet" href="./scss/main.scss" />
   </head>
   <body>
     <header class="header">
-  <div class="container header__box">
-    <svg class="header__svg">
-      <use href="./img/symbol-defs.svg#Pokeball"></use>
-    </svg>
-    <a href="./index.html" class="header__logo">
-      <img src="" alt="" />
-      Pokedex
-    </a>
-    <ul class="header__list">
-      <li class="header__item"><a href="./index.html">Головна</a></li>
-      <li class="header__item">
-        <a class="header__link" href="./fav.html">Обране</a>
-      </li>
-      <li class="header__item">Команда</li>
-    </ul>
-    <button class="header__btn">тема</button>
-  </div>
-</header>
-
+      <div class="container header__box">
+        <svg class="header__svg">
+          <use href="./img/symbol-defs.svg#Pokeball"></use>
+        </svg>
+        <a href="./index.html" class="header__logo">
+          <img src="" alt="" />
+          Pokedex
+        </a>
+        <ul class="header__list">
+          <li class="header__item"><a href="./index.html">Головна</a></li>
+          <li class="header__item">
+            <a class="header__link" href="./fav.html">Обране</a>
+          </li>
+          <li class="header__item">Команда</li>
+        </ul>
+        <button class="header__btn">тема</button>
+      </div>
+    </header>
+<div class="container">
     <h1 class="fav__title">Моє Обране</h1>
 
     <p class="fav_text">
       Тут зберігаються всі покемони, яких ви додали до улюблених.
     </p>
-
+      <p class="fav__empty" hidden>У вас поки немає обраних покемонів ❤️</p>
     <div class="fav__info">
+
       <p class="fav__count">У вас 0 улюблених покемонів</p>
 
       <button class="fav__btn" type="button">Очистити все</button>
     </div>
     <ul class="search__list" id="favorites-list"></ul>
 
-<p class="fav__empty" hidden>
-  У вас поки немає обраних покемонів ❤️
-</p>
-<script type="module" src="./main.js"></script>
+
+    <script type="module" src="./js/fav.js"></script>
+      </div>
   </body>
 </html>
