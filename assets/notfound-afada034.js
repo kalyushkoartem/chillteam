@@ -1,0 +1,2 @@
+const n=document.querySelector(".notfound[hidden]"),t=document.querySelector(".notfound__backbtn"),o=document.querySelector(".notfound__clearbtn");function c(){n&&(n.hidden=!1)}function d(){n&&(n.hidden=!0)}function i(e){t&&t.addEventListener("click",()=>{window.location.href="./index.html"}),o&&o.addEventListener("click",()=>{e(),d()})}export{d as hideNotFound,i as initNotFound,c as showNotFound};
+//# sourceMappingURL=notfound-afada034.js.map
