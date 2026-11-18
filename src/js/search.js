@@ -6,7 +6,17 @@ import {
   getPokemonById,
   getPokemonByName,
 } from './api/getPokemon';
+const FAVORITES_KEY = 'favorites';
 
+// Отримати обраних покемонів
+function getFavorites() {
+  return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+}
+
+// Зберегти обраних покемонів
+function saveFavorites(favorites) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
 // API URL для отримання покемонів за типами
 const API_URL = 'https://pokeapi.co/api/v2';
 
@@ -31,6 +41,7 @@ const perPage = 20;
 let isLoading = false;
 let loadedPokemons = [];
 let filterRequestId = 0;
+let renderedPokemons = [];
 
 // Кешування
 const typesCache = new Map();
@@ -38,34 +49,60 @@ const pokemonCache = new Map();
 
 let allPokemonNames = [];
 
+listRef.addEventListener('change', event => {
+  const checkbox = event.target.closest('.search__checkbox');
+
+  if (!checkbox) return;
+
+  const id = Number(checkbox.dataset.id);
+
+  let favorites = getFavorites();
+
+  if (checkbox.checked) {
+    const pokemon = renderedPokemons.find(item => item.id === id);
+
+    if (pokemon && !favorites.some(item => item.id === id)) {
+      favorites.push(pokemon);
+    }
+  } else {
+    favorites = favorites.filter(pokemon => pokemon.id !== id);
+  }
+
+  saveFavorites(favorites);
+});
 // Відображення покемонів
 function renderImages(array) {
-  const images = array.map(({ id, name, types, sprites }) => {
-    const image =
-      sprites.other?.['official-artwork']?.front_default ||
-      sprites.front_default ||
-      '';
+  renderedPokemons = array;
 
-    const pokemonTypes = types
-      .map(
-        ({ type }) => `
+  const favorites = getFavorites();
+  const favoriteIds = favorites.map(pokemon => pokemon.id);
+
+  const images = array
+    .map(({ id, name, types, sprites }) => {
+      const image =
+        sprites.other?.['official-artwork']?.front_default ||
+        sprites.front_default ||
+        '';
+
+      const pokemonTypes = types
+        .map(
+          ({ type }) => `
           <span class="type-badge type-badge--${type.name}">
             ${type.name}
           </span>
         `
-      )
-      .join('');
+        )
+        .join('');
 
-    const formattedId = `#${String(id).padStart(3, '0')}`;
+      const formattedId = `#${String(id).padStart(3, '0')}`;
 
-    return `
+      const isFavorite = favoriteIds.includes(id);
+
+      return `
       <li class="search__item">
+
         <a href="./details.html?id=${id}" class="search__link">
-          <img
-            src="${image}"
-            alt="${name}"
-            loading="lazy"
-          >
+          <img src="${image}" alt="${name}" loading="lazy">
 
           <p class="search__id">${formattedId}</p>
 
@@ -81,6 +118,7 @@ function renderImages(array) {
             type="checkbox"
             class="search__checkbox"
             data-id="${id}"
+            ${isFavorite ? 'checked' : ''}
             aria-label="Додати ${name} до обраного"
           >
 
@@ -88,9 +126,11 @@ function renderImages(array) {
             <use href="${symbolDefsUrl}#heart"></use>
           </svg>
         </label>
+
       </li>
     `;
-  }).join('');
+    })
+    .join('');
 
   listRef.innerHTML = images;
 }

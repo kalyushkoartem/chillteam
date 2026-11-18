@@ -198,7 +198,7 @@ if (filtrEl) {
     await renderFooterNav(pokemon.id);
 
     // Обране
-    setupFavorites(pokemon.id);
+    setupFavorites(pokemon);
 
   } catch (error) {
     console.error("Помилка завантаження Pokémon:", error);
@@ -367,28 +367,30 @@ async function renderFooterNav(id) {
 }
 
 // Обране
-function setupFavorites(id) {
+function setupFavorites(pokemon) {
   const topBtn = document.querySelector(".details__fav");
-  const bottomBtn = document.querySelector(
-    ".favorite-action-btn"
-  );
+  const bottomBtn = document.querySelector(".favorite-action-btn");
 
   if (!topBtn && !bottomBtn) return;
 
-  const getFavs = () => {
-    try {
-      const stored = JSON.parse(
-        localStorage.getItem("pokedex_favs") || "[]"
-      );
+  const FAVORITES_KEY = "favorites";
 
-      return Array.isArray(stored) ? stored : [];
+  // Отримання обраних
+  function getFavs() {
+    try {
+      return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
     } catch {
       return [];
     }
-  };
+  }
 
+  // Перевірка та оновлення кнопок
   function sync() {
-    const isFav = getFavs().includes(id);
+    const favorites = getFavs();
+
+    const isFav = favorites.some(
+      item => item.id === pokemon.id
+    );
 
     if (topBtn) {
       topBtn.classList.toggle("active", isFav);
@@ -404,21 +406,31 @@ function setupFavorites(id) {
     }
   }
 
+  // Додавання та видалення
   function toggle() {
-    const favs = getFavs();
+    let favorites = getFavs();
 
-    const updated = favs.includes(id)
-      ? favs.filter((x) => x !== id)
-      : [...favs, id];
+    const isFav = favorites.some(
+      item => item.id === pokemon.id
+    );
+
+    if (isFav) {
+      favorites = favorites.filter(
+        item => item.id !== pokemon.id
+      );
+    } else {
+      favorites.push(pokemon);
+    }
 
     localStorage.setItem(
-      "pokedex_favs",
-      JSON.stringify(updated)
+      FAVORITES_KEY,
+      JSON.stringify(favorites)
     );
 
     sync();
   }
 
+  // Обидві кнопки
   if (topBtn) topBtn.onclick = toggle;
   if (bottomBtn) bottomBtn.onclick = toggle;
 
