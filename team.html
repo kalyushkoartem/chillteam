@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    
+  <script type="module" crossorigin src="/chillteam/commonHelpers4.js"></script>
+  <link rel="modulepreload" crossorigin href="/chillteam/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="stylesheet" href="/chillteam/assets/team-a2e187f4.css">
+  <link rel="stylesheet" href="/chillteam/assets/main-5d3e802f.css">
+</head>
+<body>
+       
+<header class="header">
+  <div class="container header__box">
+    <svg class="header__svg">
+      <use href="/chillteam/assets/symbol-defs-9e525b8f.svg#Pokeball"></use>
+    </svg>
+    <a href="./index.html" class="header__logo">
+      <img src="" alt="" />
+      Pokedex
+    </a>
+    <ul class="header__list">
+      <li class="header__item current"><a href="./index.html">Головна</a></li>
+      <li class="header__item ">
+        <a class="header__link" href="./fav.html">Обране</a>
+      </li>
+      <li class="header__item ">Команда</li>
+    </ul>
+    <button class="header__btn">тема</button>
+  </div>
+</header>
+
+
+    <main class="team-main container">
+
+      <!-- Банер -->
+      <section class="team-hero" aria-labelledby="team-title">
+        <span class="team-hero__eyebrow">POKÉDEX TEAM</span>
+        <h1 id="team-title">
+          Команда, яка створює Pokédex
+        </h1>
+        <p>
+          Чотири учасники, різні навички та одна
+          спільна мета — зробити зручний і цікавий
+          світ покемонів.
+        </p>
+
+        <div class="team-hero__tags">
+          <span>👥 4 учасники</span>
+          <span>✨ Спільний проєкт</span>
+        </div>
+      </section>
+
+      <!-- Статистика -->
+      <section class="team-stats" aria-label="Статистика команди">
+        <article class="team-stat">
+          <span class="team-stat__icon">👥</span>
+          <strong id="team-members-count">4</strong>
+          <span>Учасники</span>
+        </article>
+
+        <article class="team-stat">
+          <span class="team-stat__icon">✅</span>
+          <strong id="team-done-count">0</strong>
+          <span>Виконані завдання</span>
+        </article>
+
+        <article class="team-stat">
+          <span class="team-stat__icon">📋</span>
+          <strong id="team-all-count">0</strong>
+          <span>Усі завдання</span>
+        </article>
+      </section>
+
+      <!-- Картки учасників -->
+      <section class="team-section" aria-labelledby="members-title">
+        <div class="team-heading">
+          <h2 id="members-title">Наша команда</h2>
+          <p>
+            Натисни «Переглянути внесок»,
+            щоб побачити роботу учасника.
+          </p>
+        </div>
+
+        <div class="team-grid" id="team-members"></div>
+      </section>
+
+      <!-- Завдання команди -->
+      <section class="team-section" aria-labelledby="tasks-title">
+        <div class="team-heading">
+          <h2 id="tasks-title">Хто що зробив?</h2>
+          <p>Фільтруй завдання за станом і учасником.</p>
+        </div>
+
+        <div class="team-panel">
+          <div class="team-toolbar">
+
+            <div class="team-filters"
+                 role="group">
+
+            </div>
+
+            <label class="team-choose">
+              Учасник
+              <select id="team-person-filter">
+                <option value="all">Уся команда</option>
+              </select>
+            </label>
+          </div>
+
+          <ul class="team-task-list" id="team-task-list"></ul>
+
+          <p id="team-tasks-empty" class="team-empty" hidden>
+            За цим фільтром завдань немає.
+          </p>
+        </div>
+      </section>
+
+      <!-- Прогрес -->
+      <section class="team-section team-progress"
+               aria-labelledby="progress-title">
+
+        <div class="team-progress__top">
+          <div>
+            <h2 id="progress-title">Прогрес проєкту</h2>
+            <p>Наш спільний результат</p>
+          </div>
+
+          <strong id="team-percent">0%</strong>
+        </div>
+
+        <div class="team-progress__track"
+             role="progressbar"
+             aria-label="Виконання завдань"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             id="team-progress-track">
+
+          <div class="team-progress__fill"
+               id="team-progress-fill"></div>
+        </div>
+
+        <p id="team-progress-text">
+          Підрахунок завдань...
+        </p>
+      </section>
+
+      <!-- Історія створення -->
+      <section class="team-section" aria-labelledby="journey-title">
+        <div class="team-heading">
+          <h2 id="journey-title">Як створювали Pokédex</h2>
+          <p>Наші основні етапи роботи</p>
+        </div>
+
+        <ol class="team-timeline">
+          <li>
+            <span>Етап 01</span>
+            <h3>Ідея та планування</h3>
+            <p>
+              Визначили функції сайту й
+              розподілили обов'язки.
+            </p>
+          </li>
+
+          <li>
+            <span>Етап 02</span>
+            <h3>Дизайн</h3>
+            <p>
+              Обрали палітру, вигляд карток
+              та структуру сторінок.
+            </p>
+          </li>
+
+          <li>
+            <span>Етап 03</span>
+            <h3>Розробка</h3>
+            <p>
+              Додали каталог, пошук, деталі
+              покемонів і обране.
+            </p>
+          </li>
+
+          <li>
+            <span>Етап 04</span>
+            <h3>Перевірка</h3>
+            <p>
+              Тестуємо сторінки та
+              покращуємо інтерфейс.
+            </p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <!-- Модальне вікно -->
+    <div class="team-modal" id="team-modal" hidden>
+      <div class="team-modal__backdrop"
+           data-modal-close></div>
+
+      <section class="team-modal__dialog"
+               role="dialog"
+               aria-modal="true"
+               aria-labelledby="team-modal-name"
+               tabindex="-1">
+
+        <button type="button"
+                class="team-modal__close"
+                id="team-modal-close"
+                aria-label="Закрити вікно">
+          ×
+        </button>
+
+        <div id="team-modal-content"></div>
+      </section>
+    </div>
+
+    
+</body>
+</html>
