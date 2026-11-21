@@ -117,19 +117,19 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 14px;
   font-weight: 600;
 }
-.header__item a, .header__item:not(:has(a)) {
+.header__item a {
   text-decoration: none;
   color: #333d4d;
   height: 100%;
   display: flex;
   align-items: center;
+  position: relative;
   transition: color 0.2s ease;
-  cursor: pointer;
 }
-.header__item a:hover, .header__item:not(:has(a)):hover {
+.header__item a:hover {
   color: #2b6cb0;
 }
-.header__item a::after, .header__item:not(:has(a))::after {
+.header__item a::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -141,13 +141,13 @@ input[type=number]::-webkit-outer-spin-button {
   transform: translateX(-50%);
   border-radius: 2px;
 }
-.header__item a:hover::after, .header__item:not(:has(a)):hover::after {
+.header__item a:hover::after {
   width: 100%;
 }
-.header__item__item.current a {
+.header__item.current a {
   color: #2b6cb0;
 }
-.header__item__item.current::after {
+.header__item.current a::after {
   width: 100%;
 }
 .header__btn {

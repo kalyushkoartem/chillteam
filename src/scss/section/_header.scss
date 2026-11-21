@@ -47,30 +47,26 @@
   }
 
   &__item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+
+  a {
+    text-decoration: none;
+    color: $color-text-main;
     height: 100%;
     display: flex;
     align-items: center;
     position: relative;
-    font-size: 14px;
-    font-weight: 600;
+    transition: color 0.2s ease;
 
-    a,
-    &:not(:has(a)) {
-      text-decoration: none;
-      color: $color-text-main; // За замовчуванням чорні/темні
-      height: 100%;
-      display: flex;
-      align-items: center;
-      transition: color 0.2s ease;
-      cursor: pointer;
+    &:hover {
+      color: $color-btn-text;
+    }
 
-      &:hover {
-        color: $color-btn-text; // При ховері стають синіми
-      }
-
-
-
-    // Лінія підкреслення (анімація для ховеру та активної сторінки)
     &::after {
       content: "";
       position: absolute;
@@ -89,18 +85,13 @@
     }
   }
 
-  // Активний елемент (сторінка, на якій ти зараз)
-  &__item.current {
-    a {
-      color: $color-btn-text;
-    }
+  &.current a {
+    color: $color-btn-text;
 
     &::after {
       width: 100%;
     }
   }
-
-
 }
   &__btn {
     border: 1px solid $color-btn-border;
@@ -127,4 +118,7 @@
     height: 30px;
     pointer-events: none;
    }
+
+   
+   
 }
