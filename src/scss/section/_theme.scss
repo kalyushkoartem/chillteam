@@ -1,0 +1,164 @@
+body.dark-theme {
+  background-color: #111827;
+  color: #e5e7eb;
+  transition: 0.3s;
+
+  /* Хедер */
+  .header {
+    background-color: #1e293b;
+    border-color: #334155;
+  }
+
+  .header__logo,
+  .header__item a,
+  .header__item {
+    color: #f1f5f9;
+  }
+
+  .header__btn {
+    background-color: #334155;
+    color: #facc15;
+    border-color: #475569;
+  }
+
+  /* Hero */
+  .hero__title,
+  .hero__subtitle {
+    color: #fff;
+  }
+
+  /* Пошук */
+  .search__box {
+    background-color: #1e293b;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .search__input-wrapper,
+  .search__select,
+  .search__options {
+    background-color: #273449;
+    border-color: #475569;
+  }
+
+  .search__input,
+  .search__select,
+  .search__option {
+    color: #f1f5f9;
+  }
+
+  .search__input::placeholder {
+    color: #94a3b8;
+  }
+
+  .search__option:hover,
+  .search__option.is-selected {
+    background-color: #334155;
+  }
+
+  .search__text {
+    color: #cbd5e1;
+  }
+
+  /* Покемони */
+  .search__item {
+    background-color: #273449;
+    color: #f1f5f9;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .search__name {
+    color: #f1f5f9;
+  }
+
+  .search__tag {
+    color: #94a3b8;
+  }
+
+  /* Обране */
+  .fav__title {
+    color: #f1f5f9;
+  }
+
+  .fav_text {
+    color: #94a3b8;
+  }
+
+  .fav__info {
+    background-color: #273449;
+    border-color: #475569;
+  }
+
+  .fav__count {
+    color: #cbd5e1;
+  }
+
+  .fav__btn {
+    background-color: #334155;
+    border-color: #475569;
+    color: #60a5fa;
+  }
+
+  /* Деталі покемона */
+  .details__box {
+    background-color: #1e293b;
+  }
+
+  .details__name,
+  .details__text,
+  .details__title,
+  .evo-name,
+  .evolution-title {
+    color: #f1f5f9;
+  }
+
+  .details__description,
+  .details__label,
+  .details__total,
+  .stat-label,
+  .stat-value {
+    color: #cbd5e1;
+  }
+
+  .details__height,
+  .details__weight,
+  .details__capability {
+    background-color: #273449;
+    border-color: #475569;
+  }
+
+  .evolution-wrapper,
+  .pokedex-footer {
+    border-color: #475569;
+  }
+
+  .evo-img-container.bg-blue {
+    background-color: #334155;
+  }
+
+  /* Модальне вікно */
+  .modal__content {
+    background-color: #1e293b;
+    color: #f1f5f9;
+  }
+
+  .modal__content h2,
+  .pokemon__name {
+    color: #f1f5f9;
+  }
+
+  .pokemon__bar {
+    background-color: #475569;
+  }
+
+  /* Поля введення */
+  input,
+  select {
+    background-color: #273449;
+    color: #f1f5f9;
+    border-color: #475569;
+  }
+
+  input::placeholder {
+    color: #94a3b8;
+  }
+}
