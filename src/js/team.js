@@ -10,16 +10,16 @@ const members = [
   {
     id: 1,
     name: 'Артем Калиушко',
-    role: 'Teamlid',
-    emoji: '🎨',
+    role: 'Teamlead',
+    image: '../img/cat_artem.png',
     color: '#e8f2ff',
     accent: '#2b6cb0',
     description:
-      'Продумує оформлення сторінок і зручність інтерфейсу.',
+      'Координація команди та загальний напрям роботи.',
     tasks: [
-      { title: 'Макет головної сторінки', done: true },
-      { title: 'Дизайн карток покемонів', done: true },
-      { title: 'Підбір кольорів', done: true },
+      { title: 'Верстка сторінки "Обране"', done: true },
+      { title: 'Верстка хедеру', done: true },
+      { title: 'Темна тема', done: false},
     ],
   },
 
@@ -27,15 +27,15 @@ const members = [
     id: 2,
     name: 'Софія Бондаренко',
     role: 'Sram-master',
-    emoji: '💻',
+    image: '../img/cat_sofia.png',
     color: '#fff0e4',
     accent: '#c56c20',
     description:
-      'Створює HTML, CSS та інтерактивні елементи.',
+      'Організація командної взаємодії та робочого процесу.',
     tasks: [
-      { title: 'Верстка головної сторінки', done: true },
-      { title: 'Реалізація пошуку', done: true },
-      { title: 'Адаптація для телефона', done: false },
+      { title: 'Верстка головної сторінки (html, css, js)', done: true },
+      { title: 'Фільтрування покемонів', done: true },
+      { title: 'Рендеринг', done: true },
     ],
   },
 
@@ -43,15 +43,15 @@ const members = [
     id: 3,
     name: 'Поліна Миргородська',
     role: 'Frontend-розробник',
-    emoji: '📚',
+    image: '../img/cat_polina.png',
     color: '#e6f8ee',
     accent: '#19865a',
     description:
-      'Допомагає з інформацією про покемонів і наповненням.',
+      'Реалізація функціоналу та робота над кодом.',
     tasks: [
-      { title: 'Структура даних покемонів', done: true },
-      { title: 'Опис характеристик', done: true },
-      { title: 'Перевірка контенту', done: true },
+      { title: 'Сторінка "Деталі" (html, css, js)', done: true },
+      { title: '"Нічого не знайдено"', done: true },
+      { title: 'Сторінка про команду (html, css, js)', done: true },
     ],
   },
 
@@ -59,15 +59,15 @@ const members = [
     id: 4,
     name: 'Павло Пасічник',
     role: 'Frontend-розробник',
-    emoji: '🔍',
+    image: '../img/cat_pavlo.png',
     color: '#f2eaff',
     accent: '#8551bd',
     description:
-      'Перевіряє роботу функцій і шукає помилки.',
+      'Реалізація функціоналу та робота над кодом.',
     tasks: [
-      { title: 'Перевірка переходів', done: true },
-      { title: 'Тестування обраного', done: true },
-      { title: 'Перевірка на мобільних', done: false },
+      { title: 'Модальне вікно (html, css, js)', done: true },
+      { title: 'Функція Випадковий покемон', done: true },
+      { title: 'Пошук покемона по імені', done: true },
     ],
   },
 ];
@@ -101,11 +101,12 @@ function renderMembers() {
   $('#team-members').innerHTML = members.map((member) => `
     <article class="team-person">
 
-      <div class="team-person__picture"
-           style="background:${member.color}"
-           aria-hidden="true">
-        ${member.emoji}
-      </div>
+     <div class="team-person__picture"
+     style="background:${member.color}">
+  ${member.image
+    ? `<img src="${member.image}" alt="${escapeHtml(member.name)}">`
+    : '👤'}
+</div>
 
       <h3>${escapeHtml(member.name)}</h3>
 
@@ -201,7 +202,6 @@ function renderProgress() {
     : 0;
 
   $('#team-done-count').textContent = completed;
-  $('#team-all-count').textContent = tasks.length;
 
   $('#team-percent').textContent = `${percentage}%`;
 
@@ -228,11 +228,12 @@ function openModal(member) {
   ).length;
 
   $('#team-modal-content').innerHTML = `
-    <div class="team-modal__avatar"
-         style="background:${member.color}"
-         aria-hidden="true">
-      ${member.emoji}
-    </div>
+   <div class="team-modal__avatar"
+     style="background:${member.color}">
+  ${member.image
+    ? `<img src="${member.image}" alt="${escapeHtml(member.name)}">`
+    : '👤'}
+</div>
 
     <h2 id="team-modal-name">
       ${escapeHtml(member.name)}
