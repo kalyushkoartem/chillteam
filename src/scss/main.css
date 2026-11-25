@@ -1755,4 +1755,160 @@ body {
 .fav__btn:hover {
   background-color: #1670f5;
   color: white;
+}
+
+body.dark-theme {
+  background-color: #111827;
+  color: #e5e7eb;
+  transition: 0.3s;
+  /* Хедер */
+}
+body.dark-theme .header {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+body.dark-theme .header__logo,
+body.dark-theme .header__item a,
+body.dark-theme .header__item {
+  color: #f1f5f9;
+}
+body.dark-theme .header__btn {
+  background-color: #334155;
+  color: #facc15;
+  border-color: #475569;
+}
+body.dark-theme {
+  /* Hero */
+}
+body.dark-theme .hero__title,
+body.dark-theme .hero__subtitle {
+  color: #fff;
+}
+body.dark-theme {
+  /* Пошук */
+}
+body.dark-theme .search__box {
+  background-color: #1e293b;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+}
+body.dark-theme .search__input-wrapper,
+body.dark-theme .search__select,
+body.dark-theme .search__options {
+  background-color: #273449;
+  border-color: #475569;
+}
+body.dark-theme .search__input,
+body.dark-theme .search__select,
+body.dark-theme .search__option {
+  color: #f1f5f9;
+}
+body.dark-theme .search__input::-moz-placeholder {
+  color: #94a3b8;
+}
+body.dark-theme .search__input::placeholder {
+  color: #94a3b8;
+}
+body.dark-theme .search__option:hover,
+body.dark-theme .search__option.is-selected {
+  background-color: #334155;
+}
+body.dark-theme .search__text {
+  color: #cbd5e1;
+}
+body.dark-theme {
+  /* Покемони */
+}
+body.dark-theme .search__item {
+  background-color: #273449;
+  color: #f1f5f9;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+body.dark-theme .search__name {
+  color: #f1f5f9;
+}
+body.dark-theme .search__tag {
+  color: #94a3b8;
+}
+body.dark-theme {
+  /* Обране */
+}
+body.dark-theme .fav__title {
+  color: #f1f5f9;
+}
+body.dark-theme .fav_text {
+  color: #94a3b8;
+}
+body.dark-theme .fav__info {
+  background-color: #273449;
+  border-color: #475569;
+}
+body.dark-theme .fav__count {
+  color: #cbd5e1;
+}
+body.dark-theme .fav__btn {
+  background-color: #334155;
+  border-color: #475569;
+  color: #60a5fa;
+}
+body.dark-theme {
+  /* Деталі покемона */
+}
+body.dark-theme .details__box {
+  background-color: #1e293b;
+}
+body.dark-theme .details__name,
+body.dark-theme .details__text,
+body.dark-theme .details__title,
+body.dark-theme .evo-name,
+body.dark-theme .evolution-title {
+  color: #f1f5f9;
+}
+body.dark-theme .details__description,
+body.dark-theme .details__label,
+body.dark-theme .details__total,
+body.dark-theme .stat-label,
+body.dark-theme .stat-value {
+  color: #cbd5e1;
+}
+body.dark-theme .details__height,
+body.dark-theme .details__weight,
+body.dark-theme .details__capability {
+  background-color: #273449;
+  border-color: #475569;
+}
+body.dark-theme .evolution-wrapper,
+body.dark-theme .pokedex-footer {
+  border-color: #475569;
+}
+body.dark-theme .evo-img-container.bg-blue {
+  background-color: #334155;
+}
+body.dark-theme {
+  /* Модальне вікно */
+}
+body.dark-theme .modal__content {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+body.dark-theme .modal__content h2,
+body.dark-theme .pokemon__name {
+  color: #f1f5f9;
+}
+body.dark-theme .pokemon__bar {
+  background-color: #475569;
+}
+body.dark-theme {
+  /* Поля введення */
+}
+body.dark-theme input,
+body.dark-theme select {
+  background-color: #273449;
+  color: #f1f5f9;
+  border-color: #475569;
+}
+body.dark-theme input::-moz-placeholder {
+  color: #94a3b8;
+}
+body.dark-theme input::placeholder {
+  color: #94a3b8;
 }/*# sourceMappingURL=main.css.map */
