@@ -25,29 +25,39 @@
         </p>
 
         <div class="team-hero__tags">
-          <span>👥 4 учасники</span>
-          <span>✨ Спільний проєкт</span>
+          <span> <span class="team-stat__icon"><svg class="team__icon">
+                    <use href="./img/symbol-defs.svg#people"></use>
+                    </svg> 4 учасники</span>
+          <span><svg class="team__icon3">
+                    <use href="./img/symbol-defs.svg#star"></use>
+                    </svg> Спільний проєкт</span>
         </div>
       </section>
 
       <!-- Статистика -->
       <section class="team-stats" aria-label="Статистика команди">
         <article class="team-stat">
-          <span class="team-stat__icon">👥</span>
+          <span class="team-stat__icon"><svg class="team__icon2">
+                    <use href="./img/symbol-defs.svg#people"></use>
+                    </svg></span>
           <strong id="team-members-count">4</strong>
           <span>Учасники</span>
         </article>
 
         <article class="team-stat">
-          <span class="team-stat__icon">✅</span>
+          <span class="team-stat__icon"><svg class="team__icon1">
+                    <use href="./img/symbol-defs.svg#check"></use>
+                    </svg></span>
           <strong id="team-done-count">0</strong>
           <span>Виконані завдання</span>
         </article>
 
         <article class="team-stat">
-          <span class="team-stat__icon">📋</span>
-          <strong id="team-all-count">0</strong>
-          <span>Усі завдання</span>
+          <span class="team-stat__icon"><svg class="team__icon4">
+                    <use href="./img/symbol-defs.svg#dices"></use>
+                    </svg></span>
+          <strong id="team-all-count">65</strong>
+          <span>Git-коміти, кількість комітів команди</span>
         </article>
       </section>
 
@@ -66,10 +76,19 @@
 
       <!-- Завдання команди -->
       <section class="team-section" aria-labelledby="tasks-title">
-        <div class="team-heading">
-          <h2 id="tasks-title">Хто що зробив?</h2>
-          <p>Фільтруй завдання за станом і учасником.</p>
-        </div>
+       <div class="team-heading team-heading--tasks">
+  <div>
+    <h2 id="tasks-title">Хто що зробив?</h2>
+    <p>Фільтруй завдання за учасником.</p>
+  </div>
+
+  <label class="team-choose">
+    Учасник
+    <select id="team-person-filter">
+      <option value="all">Уся команда</option>
+    </select>
+  </label>
+</div>
 
         <div class="team-panel">
           <div class="team-toolbar">
@@ -79,12 +98,7 @@
 
             </div>
 
-            <label class="team-choose">
-              Учасник
-              <select id="team-person-filter">
-                <option value="all">Уся команда</option>
-              </select>
-            </label>
+            
           </div>
 
           <ul class="team-task-list" id="team-task-list"></ul>
@@ -137,35 +151,32 @@
             <span>Етап 01</span>
             <h3>Ідея та планування</h3>
             <p>
-              Визначили функції сайту й
-              розподілили обов'язки.
+              Плануємо нашу роботу, розподіляємо обов'язки та створюємо дошку Trello для зручності.
             </p>
           </li>
 
           <li>
             <span>Етап 02</span>
-            <h3>Дизайн</h3>
+            <h3>Розробка</h3>
             <p>
-              Обрали палітру, вигляд карток
-              та структуру сторінок.
+              Пишемо розмітку, стилі та логіку для кожної сторінки.
             </p>
           </li>
 
           <li>
             <span>Етап 03</span>
-            <h3>Розробка</h3>
+            <h3>Перевірка</h3>
             <p>
-              Додали каталог, пошук, деталі
-              покемонів і обране.
+              Тестуємо сторінки та
+              перевіряємо чи все працює.
             </p>
           </li>
 
           <li>
             <span>Етап 04</span>
-            <h3>Перевірка</h3>
+            <h3>Підготовка до захисту</h3>
             <p>
-              Тестуємо сторінки та
-              покращуємо інтерфейс.
+              Робимо презентацію для представлення нашого проєкту та репетируємо захист.
             </p>
           </li>
         </ol>
