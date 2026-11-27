@@ -8,7 +8,7 @@ const members = [
     id: 1,
     name: 'Артем Калиушко',
     role: 'Teamlead',
-    image: './img/cat_artem.png',
+    image: '../img/cat_artem.png',
     color: '#e8f2ff',
     accent: '#2b6cb0',
     description:
@@ -24,7 +24,7 @@ const members = [
     id: 2,
     name: 'Софія Бондаренко',
     role: 'Sram-master',
-    image: './img/cat_sofia.png',
+    image: '../img/cat_sofia.png',
     color: '#fff0e4',
     accent: '#c56c20',
     description:
@@ -40,7 +40,7 @@ const members = [
     id: 3,
     name: 'Поліна Миргородська',
     role: 'Frontend-розробник',
-    image: './img/cat_polina.png',
+    image: '../img/cat_polina.png',
     color: '#e6f8ee',
     accent: '#19865a',
     description:
@@ -56,7 +56,7 @@ const members = [
     id: 4,
     name: 'Павло Пасічник',
     role: 'Frontend-розробник',
-    image: './img/cat_pavlo.png',
+    image: '../img/cat_pavlo.png',
     color: '#f2eaff',
     accent: '#8551bd',
     description:
