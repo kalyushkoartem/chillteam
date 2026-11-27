@@ -24,8 +24,59 @@ body.dark-theme {
   /* Hero */
   .hero__title,
   .hero__subtitle {
-    color: #fff;
+    color: #111827;
   }
+  .hero::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 700px;
+        top: -150px;
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 45%,
+                #111827b2 85%,
+                #111827 100%
+            ),
+            url("./../img/pokemon-ash-ketchum-charizard-bond-desktop-wallpaper.jpg");
+
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+
+        z-index: -1;
+        pointer-events: none;
+    }
+      .hero__box {
+        position: relative;
+        z-index: 1;
+        isolation: isolate;
+
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+
+            width: 140%;
+            height: 200%;
+
+            top: 50%;
+            left: 10%;
+            transform: translate(-50%, -50%);
+
+            background: radial-gradient(
+                ellipse at center,
+                rgba(242, 223, 153, 0.737) 0%,
+                rgba(251, 221, 145, 0.535) 35%,
+                rgba(255, 231, 187, 0.25) 60%,
+                transparent 80%
+            );
+
+            filter: blur(20px);
+            pointer-events: none;
+        }
+    }
 
   /* Пошук */
   .search__box {
@@ -160,5 +211,259 @@ body.dark-theme {
 
   input::placeholder {
     color: #94a3b8;
+  }
+
+  /* Сторінка команди */
+  .team-page {
+    background-color: #111827;
+    color: #e5e7eb;
+
+    .team-main {
+      background-color: #111827;
+    }
+  }
+
+  /* Hero */
+  .team-hero {
+    background: linear-gradient(115deg, #1e293b, #273449);
+    border-color: #334155;
+
+    &__eyebrow {
+      background-color: #334155;
+      color: #60a5fa;
+    }
+
+    h1 {
+      color: #f1f5f9;
+    }
+
+    p {
+      color: #cbd5e1;
+    }
+
+    &__tags {
+      span {
+        background-color: #334155;
+        color: #e2e8f0;
+      }
+    }
+  }
+
+  /* Статистика */
+  .team-stats {
+    .team-stat {
+      background-color: #1e293b;
+      border-color: #334155;
+
+      strong {
+        color: #f1f5f9;
+      }
+
+      > span:last-child {
+        color: #94a3b8;
+      }
+    }
+  }
+
+  /* Заголовки секцій */
+  .team-heading,
+  .team-progress {
+    h2 {
+      color: #f1f5f9;
+    }
+
+    p {
+      color: #94a3b8;
+    }
+  }
+
+  /* Картки учасників */
+  .team-person {
+    background-color: #1e293b;
+    border-color: #334155;
+
+    h3 {
+      color: #f1f5f9;
+    }
+
+    p {
+      color: #94a3b8;
+    }
+
+    &__role {
+      background-color: #334155;
+      color: #60a5fa;
+    }
+
+    &__button {
+      background-color: #334155;
+      color: #60a5fa;
+
+      &:hover,
+      &:focus-visible {
+        background-color: #2563eb;
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Панелі */
+  .team-panel,
+  .team-progress,
+  .team-timeline {
+    background-color: #1e293b;
+    border-color: #334155;
+  }
+
+  /* Фільтри */
+  .team-filter {
+    background-color: #273449;
+    color: #cbd5e1;
+
+    &.is-active,
+    &:hover {
+      background-color: #2563eb;
+      color: #fff;
+    }
+  }
+
+  .team-choose {
+    color: #e2e8f0;
+
+    select {
+      background-color: #273449;
+      color: #f1f5f9;
+      border-color: #475569;
+    }
+  }
+
+  /* Завдання */
+ 
+  /* Завдання */
+  .team-task {
+    background-color: #273449;
+    color: #e2e8f0;
+
+    &__mark {
+      background-color: #14532d;
+      color: #86efac;
+    }
+
+    &__author {
+      color: #94a3b8;
+    }
+  }
+
+
+  .team-empty {
+    color: #94a3b8;
+  }
+
+  /* Прогрес */
+  .team-progress {
+    &__top {
+      strong {
+        color: #60a5fa;
+      }
+    }
+
+    &__track {
+      background-color: #334155;
+    }
+
+    &__fill {
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+    }
+  }
+
+  /* Історія */
+  .team-timeline {
+    li {
+      border-left-color: #334155;
+
+      &:last-child {
+        border-left-color: transparent;
+      }
+
+      &::before {
+        background-color: #3b82f6;
+        border-color: #334155;
+      }
+
+      > span {
+        color: #60a5fa;
+      }
+    }
+
+    h3 {
+      color: #f1f5f9;
+    }
+
+    p {
+      color: #94a3b8;
+    }
+  }
+
+  /* Модальне вікно */
+  .team-modal {
+    &__backdrop {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    &__dialog {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    &__close {
+      background-color: #334155;
+      color: #f1f5f9;
+    }
+
+    &__role {
+      color: #60a5fa;
+    }
+
+    &__description,
+    &__count {
+      color: #cbd5e1;
+    }
+
+    h3 {
+      color: #f1f5f9;
+    }
+
+    &__tasks {
+      li {
+        background-color: #273449;
+        color: #e2e8f0;
+      }
+    }
+  }
+
+  /* Іконки */
+  .team__icon {
+    color: #60a5fa;
+  }
+
+  .team__icon1 {
+    color: #22c55e;
+  }
+
+  .team__icon2 {
+    color: #60a5fa;
+  }
+
+  .team__icon3 {
+    color: #facc15;
+  }
+
+  .team__icon4 {
+    color: #38bdf8;
   }
 }

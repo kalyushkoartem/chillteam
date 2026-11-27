@@ -1,9 +1,6 @@
 
 // ====================================
 // ДАНІ УЧАСНИКІВ
-// Змінюй імена, ролі, описи та завдання.
-// done: true — виконано
-// done: false — у процесі
 // ====================================
 
 const members = [
@@ -17,9 +14,9 @@ const members = [
     description:
       'Координація команди та загальний напрям роботи.',
     tasks: [
-      { title: 'Верстка сторінки "Обране"', done: true },
-      { title: 'Верстка хедеру', done: true },
-      { title: 'Темна тема', done: false},
+      { title: 'Верстка сторінки "Обране"' },
+      { title: 'Верстка хедеру' },
+      { title: 'Темна тема' },
     ],
   },
 
@@ -33,9 +30,9 @@ const members = [
     description:
       'Організація командної взаємодії та робочого процесу.',
     tasks: [
-      { title: 'Верстка головної сторінки (html, css, js)', done: true },
-      { title: 'Фільтрування покемонів', done: true },
-      { title: 'Рендеринг', done: true },
+      { title: 'Верстка головної сторінки (html, css, js)' },
+      { title: 'Фільтрування покемонів' },
+      { title: 'Рендеринг' },
     ],
   },
 
@@ -49,9 +46,9 @@ const members = [
     description:
       'Реалізація функціоналу та робота над кодом.',
     tasks: [
-      { title: 'Сторінка "Деталі" (html, css, js)', done: true },
-      { title: '"Нічого не знайдено"', done: true },
-      { title: 'Сторінка про команду (html, css, js)', done: true },
+      { title: 'Сторінка "Деталі" (html, css, js)' },
+      { title: '"Нічого не знайдено"' },
+      { title: 'Сторінка про команду (html, css, js)' },
     ],
   },
 
@@ -65,15 +62,16 @@ const members = [
     description:
       'Реалізація функціоналу та робота над кодом.',
     tasks: [
-      { title: 'Модальне вікно (html, css, js)', done: true },
-      { title: 'Функція Випадковий покемон', done: true },
-      { title: 'Пошук покемона по імені', done: true },
+      { title: 'Модальне вікно (html, css, js)' },
+      { title: 'Функція Випадковий покемон' },
+      { title: 'Пошук покемона по імені' },
     ],
   },
 ];
 
+
 // ====================================
-// ДОПОМІЖНІ ФУНКЦІЇ
+// ДОПОМІЖНІ ЗМІННІ ТА ФУНКЦІЇ
 // ====================================
 
 const $ = (selector) => document.querySelector(selector);
@@ -87,11 +85,11 @@ const escapeHtml = (value) =>
     "'": '&#39;',
   })[character]);
 
-let statusFilter = 'all';
 let memberFilter = 'all';
 let previouslyFocused = null;
 
 const modal = $('#team-modal');
+
 
 // ====================================
 // КАРТКИ УЧАСНИКІВ
@@ -101,38 +99,50 @@ function renderMembers() {
   $('#team-members').innerHTML = members.map((member) => `
     <article class="team-person">
 
-     <div class="team-person__picture"
-     style="background:${member.color}">
-  ${member.image
-    ? `<img src="${member.image}" alt="${escapeHtml(member.name)}">`
-    : '👤'}
-</div>
+      <div
+        class="team-person__picture"
+        style="background:${member.color}"
+      >
+        ${member.image
+          ? `<img
+              src="${member.image}"
+              alt="${escapeHtml(member.name)}"
+            >`
+          : '👤'}
+      </div>
 
       <h3>${escapeHtml(member.name)}</h3>
 
-      <span class="team-person__role"
-            style="
-              color:${member.accent};
-              background:${member.color}
-            ">
+      <span
+        class="team-person__role"
+        style="
+          color:${member.accent};
+          background:${member.color};
+        "
+      >
         ${escapeHtml(member.role)}
       </span>
 
       <p>${escapeHtml(member.description)}</p>
 
-      <button type="button"
-              class="team-person__button"
-              data-person-id="${member.id}"
-              aria-label="Переглянути внесок: ${escapeHtml(member.name)}">
+      <button
+        type="button"
+        class="team-person__button"
+        data-person-id="${member.id}"
+        aria-label="Переглянути внесок: ${escapeHtml(member.name)}"
+      >
         Переглянути внесок →
       </button>
 
     </article>
   `).join('');
 
-  // Заповнюємо список учасників у фільтрі
+
+  // Заповнення фільтра учасників
+
   $('#team-person-filter').innerHTML = `
     <option value="all">Уся команда</option>
+
     ${members.map((member) => `
       <option value="${member.id}">
         ${escapeHtml(member.name)}
@@ -140,11 +150,15 @@ function renderMembers() {
     `).join('')}
   `;
 
+
+  // Кількість учасників
+
   $('#team-members-count').textContent = members.length;
 }
 
+
 // ====================================
-// ПЕРЕГЛЯД ЗАВДАНЬ
+// СПИСОК ЗАВДАНЬ
 // ====================================
 
 function renderTasks() {
@@ -158,19 +172,19 @@ function renderTasks() {
         ...task,
         author: member.name,
       }))
-    )
-    .filter((task) =>
-      statusFilter === 'all' ||
-      (statusFilter === 'done' ? task.done : !task.done)
     );
+
+
+  // Відображення завдань із зеленими галочками
 
   $('#team-task-list').innerHTML = tasks.map((task) => `
     <li class="team-task">
 
-      <span class="team-task__mark ${
-        task.done ? 'is-done' : 'is-pending'
-      }" aria-hidden="true">
-        ${task.done ? '✓' : '◷'}
+      <span
+        class="team-task__mark"
+        aria-hidden="true"
+      >
+        ✓
       </span>
 
       <span class="team-task__title">
@@ -181,12 +195,15 @@ function renderTasks() {
         ${escapeHtml(task.author)}
       </span>
 
-
     </li>
   `).join('');
 
+
+  // Повідомлення, якщо завдань немає
+
   $('#team-tasks-empty').hidden = tasks.length > 0;
 }
+
 
 // ====================================
 // ПРОГРЕС ПРОЄКТУ
@@ -195,26 +212,40 @@ function renderTasks() {
 function renderProgress() {
   const tasks = members.flatMap((member) => member.tasks);
 
-  const completed = tasks.filter((task) => task.done).length;
+  const completed = tasks.length;
 
-  const percentage = tasks.length
-    ? Math.round(completed / tasks.length * 100)
-    : 0;
+  const percentage = tasks.length ? 100 : 0;
+
+
+  // Кількість виконаних завдань
 
   $('#team-done-count').textContent = completed;
 
+
+  // Відсоток прогресу
+
   $('#team-percent').textContent = `${percentage}%`;
 
+
+  // Заповнення прогрес-бара
+
   $('#team-progress-fill').style.width = `${percentage}%`;
+
+
+  // Доступність progressbar
 
   $('#team-progress-track').setAttribute(
     'aria-valuenow',
     String(percentage)
   );
 
+
+  // Текст прогресу
+
   $('#team-progress-text').textContent =
     `${completed} із ${tasks.length} завдань виконано`;
 }
+
 
 // ====================================
 // МОДАЛЬНЕ ВІКНО УЧАСНИКА
@@ -223,17 +254,24 @@ function renderProgress() {
 function openModal(member) {
   previouslyFocused = document.activeElement;
 
-  const completed = member.tasks.filter(
-    (task) => task.done
-  ).length;
+  const completed = member.tasks.length;
+
+
+  // Вміст модального вікна
 
   $('#team-modal-content').innerHTML = `
-   <div class="team-modal__avatar"
-     style="background:${member.color}">
-  ${member.image
-    ? `<img src="${member.image}" alt="${escapeHtml(member.name)}">`
-    : '👤'}
-</div>
+
+    <div
+      class="team-modal__avatar"
+      style="background:${member.color}"
+    >
+      ${member.image
+        ? `<img
+            src="${member.image}"
+            alt="${escapeHtml(member.name)}"
+          >`
+        : '👤'}
+    </div>
 
     <h2 id="team-modal-name">
       ${escapeHtml(member.name)}
@@ -254,33 +292,54 @@ function openModal(member) {
     </p>
 
     <ul class="team-modal__tasks">
+
       ${member.tasks.map((task) => `
         <li>
-          <span aria-hidden="true">
-            ${task.done ? '✅' : '⏳'}
+          <span
+            style="color:#178451; font-weight:800;"
+            aria-hidden="true"
+          >
+            ✓
           </span>
+
           ${escapeHtml(task.title)}
         </li>
       `).join('')}
+
     </ul>
   `;
 
+
+  // Відкриття модального вікна
+
   modal.hidden = false;
+
   document.body.classList.add('team-modal-open');
+
   $('#team-modal-close').focus();
 }
 
+
+// ====================================
+// ЗАКРИТТЯ МОДАЛЬНОГО ВІКНА
+// ====================================
+
 function closeModal() {
   modal.hidden = true;
+
   document.body.classList.remove('team-modal-open');
+
   previouslyFocused?.focus();
 }
+
 
 // ====================================
 // ОБРОБНИКИ ПОДІЙ
 // ====================================
 
-// Кнопки «Переглянути внесок»
+
+// Перегляд внеску учасника
+
 $('#team-members').addEventListener('click', (event) => {
   const button = event.target.closest('[data-person-id]');
 
@@ -290,35 +349,27 @@ $('#team-members').addEventListener('click', (event) => {
     (person) => person.id === Number(button.dataset.personId)
   );
 
-  if (member) openModal(member);
+  if (member) {
+    openModal(member);
+  }
 });
 
-// Фільтри статусу завдань
-$('.team-filters').addEventListener('click', (event) => {
-  const button = event.target.closest('[data-status]');
 
-  if (!button) return;
+// Фільтр завдань за учасником
 
-  statusFilter = button.dataset.status;
-
-  document.querySelectorAll('.team-filter').forEach((element) => {
-    const active = element === button;
-
-    element.classList.toggle('is-active', active);
-    element.setAttribute('aria-pressed', String(active));
-  });
-
-  renderTasks();
-});
-
-// Фільтр за учасником
 $('#team-person-filter').addEventListener('change', (event) => {
   memberFilter = event.target.value;
+
   renderTasks();
 });
 
-// Закриття модального вікна
+
+// Закриття кнопкою
+
 $('#team-modal-close').addEventListener('click', closeModal);
+
+
+// Закриття натисканням на фон
 
 modal.addEventListener('click', (event) => {
   if (event.target.closest('[data-modal-close]')) {
@@ -326,24 +377,24 @@ modal.addEventListener('click', (event) => {
   }
 });
 
-// Закриття через Escape
+
+// Закриття клавішею Escape
+
 document.addEventListener('keydown', (event) => {
   if (modal.hidden) return;
 
   if (event.key === 'Escape') {
     closeModal();
   }
-
-  if (event.key === 'Tab') {
-    event.preventDefault();
-    $('#team-modal-close').focus();
-  }
 });
+
 
 // ====================================
 // ЗАПУСК СТОРІНКИ
 // ====================================
 
 renderMembers();
+
 renderTasks();
+
 renderProgress();

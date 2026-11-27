@@ -1,20 +1,30 @@
-
 <header class="header">
   <div class="container header__box">
-    <svg class="header__svg">
-      <use href="./img/symbol-defs.svg#Pokeball"></use>
-    </svg>
-    <a href="./index.html" class="header__logo">
-      <img src="" alt="" />
-      Pokedex
-    </a>
+    <div class="header__logobox">
+      <svg class="header__svg">
+        <use href="./img/symbol-defs.svg#Pokeball"></use>
+      </svg>
+      <a href="./index.html" class="header__logo">
+        <img src="" alt="" />
+        Pokedex
+      </a>
+    </div>
+    <div class="header__nav">
     <ul class="header__list">
       <li class="header__item current"><a href="./index.html">Головна</a></li>
-      <li class="header__item ">
+      <li class="header__item">
         <a class="header__link" href="./fav.html">Обране</a>
       </li>
-      <li class="header__item "><a class="header__link" href="./team.html">Команда</a></li>
+      <li class="header__item">
+        <a class="header__link" href="./team.html">Команда</a>
+      </li>
     </ul>
-    <button class="header__btn"></button>
+<button class="header__btn" type="button" aria-label="Перемкнути тему">
+  <svg class="header__theme-icon">
+    <use href="./img/symbol-defs.svg#moon"></use>
+  </svg>
+</button>
+    </div>
   </div>
 </header>
+

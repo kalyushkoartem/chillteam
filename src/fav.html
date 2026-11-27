@@ -6,9 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="./scss/main.scss" />
   </head>
-  <body>
-    <header class="header">
-      <div class="container header__box">
+  <body><header class="header">
+    <div class="container header__box">
+      <div class="header__logobox">
         <svg class="header__svg">
           <use href="./img/symbol-defs.svg#Pokeball"></use>
         </svg>
@@ -16,23 +16,32 @@
           <img src="" alt="" />
           Pokedex
         </a>
-        <ul class="header__list">
-          <li class="header__item"><a href="./index.html">Головна</a></li>
-          <li class="header__item current">
-            <a class="header__link " href="./fav.html">Обране</a>
-          </li>
-          <li class="header__item"><a class="header__link " href="./team.html">Команда</a></li>
-        </ul>
-        <button class="header__btn">тема</button>
       </div>
-    </header>
-<div class="container">
-    <h1 class="fav__title">Моє Обране</h1>
+      <div class="header__nav">
+        <ul class="header__list">
+          <li class="header__item "><a href="./index.html">Головна</a></li>
+          <li class="header__item current">
+            <a class="header__link" href="./fav.html">Обране</a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="./team.html">Команда</a>
+          </li>
+        </ul>
+        <button class="header__btn" type="button" aria-label="Перемкнути тему">
+          <svg class="header__theme-icon">
+            <use href="./img/symbol-defs.svg#moon"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+<div class="container fav__box">
+    <h1 class="fav__title">❤️ Моє Обране</h1>
 
-    <p class="fav_text">
+    <p class="fav__text">
       Тут зберігаються всі покемони, яких ви додали до улюблених.
     </p>
-      <p class="fav__empty" hidden>У вас поки немає обраних покемонів ❤️</p>
+      <p class="fav__empty" hidden>У вас поки немає обраних покемонів </p>
     <div class="fav__info">
 
       <p class="fav__count">У вас 0 улюблених покемонів</p>

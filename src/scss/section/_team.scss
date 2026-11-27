@@ -1,0 +1,738 @@
+/* Стилі сторінки команди */
+
+$primary: #2b6cb0;
+$text: #333d4d;
+$muted: #718096;
+$border: #e2e8f0;
+$white: #fff;
+
+.team-main{
+  padding-top: 80px;
+}
+.team-page {
+  background: #f4f7fb;
+  color: $text;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .header {
+    &__logo {
+      margin-right: 0;
+    }
+
+    &__box {
+      gap: 16px;
+    }
+
+    &__list {
+      margin-right: 0;
+      gap: 24px;
+    }
+
+    &__item {
+      &.current > a {
+        color: $primary;
+      }
+    }
+  }
+
+  .team-main {
+    padding-top: 94px;
+    padding-bottom: 72px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1326px;
+  }
+}
+
+/* HERO */
+
+.team-hero {
+  padding: 48px 42px;
+  border-radius: 22px;
+  background: linear-gradient(115deg, #e5f1ff, #f3f8ff);
+  border: 1px solid #dceafd;
+
+  &__eyebrow {
+    display: inline-block;
+    background: $white;
+    border-radius: 30px;
+    padding: 7px 13px;
+    color: $primary;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  h1 {
+    font-size: clamp(27px, 4vw, 43px);
+    line-height: 1.17;
+    max-width: 680px;
+    margin: 18px 0 12px;
+  }
+
+  p {
+    color: #62758c;
+    max-width: 600px;
+    line-height: 1.65;
+  }
+
+  &__tags {
+    align-items: center;
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    span {
+      background: $white;
+      border-radius: 30px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+}
+
+/* СТАТИСТИКА */
+
+.team-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 22px 0 0;
+}
+
+.team-stat {
+  border: 1px solid $border;
+  border-radius: 18px;
+  padding: 22px;
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  &__icon {
+    font-size: 24px;
+  }
+
+  strong {
+    font-size: 30px;
+  }
+
+  > span:last-child {
+    color: $muted;
+    font-size: 14px;
+  }
+}
+
+/* СЕКЦІЇ */
+
+.team-section {
+  margin-top: 56px;
+}
+
+.team-heading {
+  margin-bottom: 22px;
+
+  &--tasks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 14px;
+    color: $muted;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+}
+
+/* КАРТКИ УЧАСНИКІВ */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.team-person {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 18px;
+  padding: 13px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s, box-shadow 0.22s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px #254a7917;
+  }
+
+  &__picture {
+    height: 160px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 62px;
+
+    img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  h3 {
+    margin-top: 17px;
+    font-size: 19px;
+  }
+
+  &__role {
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    align-self: flex-start;
+    margin-top: 9px;
+    padding: 5px 10px;
+  }
+
+  p {
+    font-size: 13px;
+    color: $muted;
+    line-height: 1.6;
+    margin: 13px 0 20px;
+    flex: 1;
+  }
+
+  &__button {
+    background: #ebf5ff;
+    color: $primary;
+    border-radius: 10px;
+    padding: 12px 8px;
+    font-size: 13px;
+    font-weight: 700;
+    width: 100%;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover,
+    &:focus-visible {
+      background: $primary;
+      color: $white;
+    }
+  }
+}
+
+/* ПАНЕЛІ */
+
+.team-panel,
+.team-progress,
+.team-timeline {
+  border: 1px solid $border;
+  background: $white;
+  border-radius: 19px;
+  padding: 26px;
+}
+
+/* ФІЛЬТРИ ЗАВДАНЬ */
+
+.team-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.team-filters {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.team-filter {
+  background: #f1f5f9;
+  padding: 10px 15px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #52647a;
+
+  &.is-active,
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+}
+
+.team-choose {
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  select {
+    font: inherit;
+    border: 1px solid #d5e0ed;
+    border-radius: 8px;
+    background: $white;
+    color: $text;
+    padding: 9px;
+    max-width: 180px;
+  }
+}
+
+/* СПИСОК ЗАВДАНЬ */
+
+.team-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-task {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #f7faff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  min-height: 54px;
+  font-size: 14px;
+
+
+&__mark {
+padding: 3px;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 30%;
+  background: #e0f7e9;
+  color: #178451;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__author {
+    color: $muted;
+    font-size: 12px;
+  }
+
+  &__status {
+    border-radius: 16px;
+    color: #52647a;
+    background: #e9f0f9;
+    padding: 5px 9px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+}
+
+.team-empty {
+  padding: 18px;
+  text-align: center;
+  color: $muted;
+}
+
+/* ПРОГРЕС */
+
+.team-progress {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    strong {
+      font-size: 32px;
+      color: $primary;
+    }
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 14px;
+    color: $muted;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  &__track {
+    height: 12px;
+    background: #e3effb;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 22px;
+  }
+
+  &__fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, $primary, #69b5ff);
+    border-radius: 15px;
+    transition: width 0.55s;
+  }
+}
+
+/* ІСТОРІЯ СТВОРЕННЯ */
+
+.team-timeline {
+  list-style: none;
+  counter-reset: step;
+
+  li {
+    border-left: 2px solid #dbeafe;
+    padding: 0 0 26px 26px;
+    margin-left: 7px;
+    position: relative;
+
+    &:last-child {
+      padding-bottom: 0;
+      border-left-color: transparent;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid #dbeafe;
+      background: $primary;
+    }
+
+    > span {
+      color: $primary;
+      font-weight: 800;
+      font-size: 12px;
+    }
+  }
+
+  h3 {
+    font-size: 17px;
+    margin-top: 5px;
+  }
+
+  p {
+    color: $muted;
+    margin-top: 5px;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+}
+
+/* МОДАЛЬНЕ ВІКНО */
+
+.team-modal {
+  &[hidden] {
+    display: none !important;
+  }
+
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: #132541a8;
+  }
+
+  &__dialog {
+    position: relative;
+    background: $white;
+    width: min(100%, 520px);
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    padding: 30px;
+    border-radius: 21px;
+    box-shadow: 0 20px 80px #13254140;
+    outline: none;
+  }
+
+  &__close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 36px;
+    height: 36px;
+    background: #f1f5f9;
+    border-radius: 50%;
+    font-size: 24px;
+    color: $text;
+  }
+
+  &__avatar {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 18px;
+    font-size: 45px;
+    margin-bottom: 18px;
+
+    img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  &__role {
+    font-size: 14px;
+    font-weight: 700;
+    color: $primary;
+    margin: 6px 0 14px;
+  }
+
+  &__description,
+  &__count {
+    font-size: 14px;
+    color: $muted;
+    line-height: 1.6;
+  }
+
+  h3 {
+    margin-top: 23px;
+    margin-bottom: 7px;
+  }
+
+  &__tasks {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      padding: 12px;
+      background: #f5f8fc;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+.team-modal-open {
+  overflow: hidden;
+}
+
+/* ІКОНКИ */
+
+.team__icon {
+  width: 15px;
+  height: 15px;
+  color: rgb(24, 38, 93);
+  margin-right: 5px;
+}
+
+.team__icon3 {
+  width: 15px;
+  height: 15px;
+  color: rgb(245, 212, 3);
+  margin-right: 5px;
+}
+
+.team__icon2 {
+  width: 30px;
+  height: 30px;
+  color: rgb(24, 38, 93);
+}
+
+.team__icon1 {
+  width: 30px;
+  height: 30px;
+  color: rgb(3, 182, 3);
+}
+
+.team__icon4 {
+  width: 30px;
+  height: 30px;
+  color: rgb(4, 129, 247);
+}
+
+/* АДАПТИВНІСТЬ */
+
+@media (max-width: 1100px) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .team-page {
+    .header {
+      &__logo {
+        font-size: 20px;
+      }
+
+      &__list {
+        gap: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .team-page {
+    .header {
+      height: auto;
+      min-height: 60px;
+
+      &__box {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        gap: 9px;
+      }
+
+      &__list {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        height: 34px;
+      }
+
+      &__item {
+        font-size: 12px;
+      }
+
+      &__btn {
+        margin-left: auto;
+      }
+    }
+
+    .team-main {
+      padding-top: 140px;
+    }
+  }
+
+  .team-hero {
+    padding: 29px 22px;
+  }
+
+  .team-stats {
+    gap: 9px;
+  }
+
+  .team-stat {
+    padding: 14px;
+
+    strong {
+      font-size: 23px;
+    }
+
+    > span:last-child {
+      font-size: 11px;
+    }
+  }
+
+  .team-grid {
+    gap: 12px;
+  }
+
+  .team-person {
+    &__picture {
+      height: 130px;
+    }
+  }
+
+  .team-panel,
+  .team-progress,
+  .team-timeline {
+    padding: 18px;
+  }
+
+  .team-task {
+    flex-wrap: wrap;
+
+    &__title {
+      flex-basis: calc(100% - 40px);
+    }
+
+    &__author {
+      margin-left: 38px;
+    }
+  }
+
+  .team-heading {
+    &--tasks {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    h2 {
+      font-size: 23px;
+    }
+  }
+
+  .team-progress h2 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 440px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-person {
+    &__picture {
+      height: 180px;
+    }
+  }
+
+  .team-page {
+    .header {
+      &__svg {
+        display: none;
+      }
+
+      &__logo {
+        font-size: 19px;
+      }
+    }
+  }
+
+  .team-stat {
+    &__icon {
+      font-size: 20px;
+    }
+  }
+}

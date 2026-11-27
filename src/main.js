@@ -18,3 +18,8 @@ if (document.querySelector('.details__box')) {
   import('./js/header.js');
   import('./js/details.js');
 }
+
+if (document.querySelector('.team-main')) {
+  import('./js/header.js');
+  import('./js/team.js')
+}

@@ -9,7 +9,11 @@ if (savedTheme === 'dark') {
 function updateButton() {
   const isDark = document.body.classList.contains('dark-theme');
 
-  themeBtn.textContent = isDark ? ' Світла тема' : ' Темна тема';
+  themeBtn.innerHTML = `
+    <svg class="header__theme-icon">
+      <use href="./img/symbol-defs.svg#${isDark ? 'sun' : 'moon'}"></use>
+    </svg>
+  `;
 }
 
 updateButton();
