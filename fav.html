@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     
-    <script type="module" crossorigin src="/chillteam/assets/modulepreload-polyfill-3cfb730f.js"></script>
-    <script type="module" crossorigin src="/chillteam/assets/main-fece4e88.js"></script>
-    <link rel="stylesheet" href="/chillteam/assets/main-32557c85.css">
+    <script type="module" crossorigin src="/chillteam/assets/main-abb88bd5.js"></script>
+    <link rel="stylesheet" href="/chillteam/assets/main-4696343a.css">
   </head>
-  <body>
-    <header class="header">
-      <div class="container header__box">
+  <body><header class="header">
+    <div class="container header__box">
+      <div class="header__logobox">
         <svg class="header__svg">
           <use href="/chillteam/assets/symbol-defs-9e525b8f.svg#Pokeball"></use>
         </svg>
@@ -19,23 +18,32 @@
           <img src="" alt="" />
           Pokedex
         </a>
-        <ul class="header__list">
-          <li class="header__item"><a href="./index.html">Головна</a></li>
-          <li class="header__item current">
-            <a class="header__link " href="./fav.html">Обране</a>
-          </li>
-          <li class="header__item"><a class="header__link " href="./team.html">Команда</a></li>
-        </ul>
-        <button class="header__btn">тема</button>
       </div>
-    </header>
-<div class="container">
-    <h1 class="fav__title">Моє Обране</h1>
+      <div class="header__nav">
+        <ul class="header__list">
+          <li class="header__item "><a href="./index.html">Головна</a></li>
+          <li class="header__item current">
+            <a class="header__link" href="./fav.html">Обране</a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="./team.html">Команда</a>
+          </li>
+        </ul>
+        <button class="header__btn" type="button" aria-label="Перемкнути тему">
+          <svg class="header__theme-icon">
+            <use href="/chillteam/assets/symbol-defs-9e525b8f.svg#moon"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+<div class="container fav__box">
+    <h1 class="fav__title">❤️ Моє Обране</h1>
 
-    <p class="fav_text">
+    <p class="fav__text">
       Тут зберігаються всі покемони, яких ви додали до улюблених.
     </p>
-      <p class="fav__empty" hidden>У вас поки немає обраних покемонів ❤️</p>
+      <p class="fav__empty" hidden>У вас поки немає обраних покемонів </p>
     <div class="fav__info">
 
       <p class="fav__count">У вас 0 улюблених покемонів</p>

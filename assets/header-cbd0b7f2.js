@@ -1,2 +1,0 @@
-const e=document.querySelector(".header__btn"),a=localStorage.getItem("theme");a==="dark"&&document.body.classList.add("dark-theme");function o(){const t=document.body.classList.contains("dark-theme");e.textContent=t?" Світла тема":" Темна тема"}o();e.addEventListener("click",()=>{document.body.classList.toggle("dark-theme");const t=document.body.classList.contains("dark-theme");localStorage.setItem("theme",t?"dark":"light"),o()});
-//# sourceMappingURL=header-cbd0b7f2.js.map
