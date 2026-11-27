@@ -1,3 +1,4 @@
+import symbolDefsUrl from '../img/symbol-defs.svg?url';
 const themeBtn = document.querySelector('.header__btn');
 
 const savedTheme = localStorage.getItem('theme');
@@ -11,7 +12,7 @@ function updateButton() {
 
   themeBtn.innerHTML = `
     <svg class="header__theme-icon">
-      <use href="./img/symbol-defs.svg#${isDark ? 'sun' : 'moon'}"></use>
+      <use href="${symbolDefsUrl}#${isDark ? 'sun' : 'moon'}"></use>
     </svg>
   `;
 }

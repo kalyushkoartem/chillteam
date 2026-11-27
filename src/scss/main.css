@@ -89,7 +89,7 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 500px;
+  gap: 600px;
 }
 .header__nav {
   display: flex;
@@ -1045,6 +1045,7 @@ input[type=number]::-webkit-outer-spin-button {
   fill: currentColor;
 }
 .details__box {
+  margin-top: 50px;
   background-color: #ffffff;
   border-radius: 20px;
   padding: 32px;
@@ -1818,7 +1819,7 @@ body.dark-theme {
 }
 body.dark-theme .hero__title,
 body.dark-theme .hero__subtitle {
-  color: #111827;
+  color: #1b2742;
 }
 body.dark-theme .hero::before {
   content: "";
